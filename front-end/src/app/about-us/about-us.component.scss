@@ -1,0 +1,21 @@
+.about-us-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .about-logo {
+    border-radius: 50%;
+  }
+  
+  .about-description {
+    text-align: center;
+    max-width: 600px;
+  }
+  
+  .about-description h2 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  

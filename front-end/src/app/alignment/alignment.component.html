@@ -1,0 +1,302 @@
+<mat-card class="analysis-container" *ngIf="!isParametersSubmited">
+  <mat-card-title class="m-b-4" style="display: flex; align-items: center; gap: 8px; margin-left: 15px;">
+    Add new alignment
+  </mat-card-title>
+  <mat-horizontal-stepper #stepper>
+    <mat-step label="Select Metadata file">
+      <form #metadataForm="ngForm">
+        <div class="file-selection-container">
+          <div class="file-dropdown">
+            <p>Experiment:</p>
+            <div *ngIf="errorMessage" class="error-snackbar">
+              {{ errorMessage }}
+            </div>
+            <div *ngIf="loadingOnSampleIds" class="loading">
+              <p>Loading the data... Please wait.</p>
+            </div>
+            <mat-select [(value)]="selectedMetadataFileDetails" placeholder="Select your sample metadata file" style=" border: 1px solid #ccc;
+            border-radius: 4px; " (openedChange)="onSelectOpened($event)">
+              <mat-option *ngFor="let file of filesDataSource.data" [value]="file.filename">
+                {{ file.filename }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+        <button mat-raised-button color="primary" type="submit" (click)="goToNextStep(stepper)"
+          [disabled]="!metadataForm.valid ">
+          Next</button>
+      </form>
+    </mat-step>
+    <mat-step label="Uploading Sample">
+      <div class="file-selection-container">
+        <div class="file-dropdown">
+          <p>Aligner : {{ selectedAligner }}</p>
+        </div>
+      </div>
+      <div *ngFor="let sample of allSamplesData.samples; let i = index" style="margin-bottom: 20px; background-color: rgba(120, 185, 253, 0.08); 
+            border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" class="add-sample-card">
+        <form #UploadSampleForm="ngForm">
+          <div class="step-content">
+            <div class="file-selection-row" style="display: flex; align-items: center; gap: 15px;">
+              <h3 style="text-decoration: underline; margin: 0; min-width: 80px;">Sample {{ i + 1 }}</h3>
+              <div style="display: flex; align-items: center; gap: 15px; flex-grow: 1;">
+                <div class="file-dropdown" style="flex: 1;">
+                  <div *ngIf="!sample.sampleName" class="indication-message id-message">
+                    Please select a Sample ID from the list found in the metadata file.
+                  </div>
+                  <mat-select [(value)]="sample.sampleName" (selectionChange)="onSampleIdSelected(i)"
+                    [placeholder]="sample.sampleName || 'Select an id'"
+                    style="border: 1px solid #ccc; border-radius: 4px; width: 100%;">
+                    <mat-option *ngFor="let id of remainingIds" [value]="id">
+                      {{ id }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div class="file-dropdown" *ngIf="sample.sampleName && sample.selectedSequencingType" style="flex: 1;">
+                  <div *ngIf="!sample.selectedSequencingType" class="indication-message sequencing-message">
+                    Select a Sequencing type to process the raw files. This selection will apply to all following
+                    samples.
+                  </div>
+                  <mat-select [(value)]="sample.selectedSequencingType"
+                    [placeholder]="sample.selectedSequencingType ? (sample.selectedSequencingType === 'singleEnd' ? 'Single end' : 'Paired end') : 'Select Sequencing type'"
+                    style="border: 1px solid #ccc; border-radius: 4px; width: 100%;"
+                    (openedChange)="onSelectOpened($event)"
+                    (selectionChange)="setMasterSequencingType(sample.selectedSequencingType, i)" [disabled]="i > 0">
+                    <mat-option value="singleEnd">
+                      Single end
+                    </mat-option>
+                    <mat-option value="pairedEnd">
+                      Paired end
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+            </div>
+            <div class="file-dropdown" *ngIf="sample.sampleName && !sample.selectedSequencingType" style="flex: 1;">
+              <div *ngIf="!sample.selectedSequencingType" class="indication-message sequencing-message">
+                Select a Sequencing type to process the raw files. This selection will apply to all following
+                samples.
+              </div>
+              <div class="file-dropdown">
+                <mat-select [(value)]="sample.selectedSequencingType"
+                  [placeholder]="sample.selectedSequencingType ? (sample.selectedSequencingType === 'singleEnd' ? 'Single end' : 'Paired end') : 'Select Sequencing type'"
+                  style="border: 1px solid #ccc; border-radius: 4px; width: 100%;"
+                  (openedChange)="onSelectOpened($event)"
+                  (selectionChange)="setMasterSequencingType(sample.selectedSequencingType, i)" [disabled]="i > 0">
+                  <mat-option value="singleEnd">
+                    Single end
+                  </mat-option>
+                  <mat-option value="pairedEnd">
+                    Paired end
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div *ngIf="sample.selectedSequencingType" style="margin-top: 15px;">
+              <label for="fq1Name-{{ i }}">fastq 1:</label>
+              <input type="file" id="fq1Name-{{ i }}" name="fq1Name" (change)="onFqFileSelected($event, i, 'fq1Name')"
+                multiple required />
+              <ul style="margin-top: 5px;">
+                <li *ngFor="let file of sample.fq1Files; let j = index" style="margin-bottom: 5px;">
+                  {{ file }}
+                  <span class="remove-icon" (click)="removeFile(i, 'fq1Name', j)"
+                    (keydown.enter)="removeFile(i, 'fq2Name', j)" style="cursor: pointer;">&#10005;</span>
+                </li>
+              </ul>
+              <div *ngIf="sample.selectedSequencingType === 'pairedEnd'" style="margin-top: 10px;">
+                <label for="fq2Name-{{ i }}">fastq 2:</label>
+                <input type="file" id="fq2Name-{{ i }}" name="fq2Name" (change)="onFqFileSelected($event, i, 'fq2Name')"
+                  multiple required
+                  [disabled]="sample.fq1Files.length === 0 || sample.fq2Files.length >= sample.fq1Files.length" />
+                <ul style="margin-top: 5px;">
+                  <li *ngFor="let file of sample.fq2Files; let j = index" style="margin-bottom: 5px;">
+                    {{ file }}
+                    <span class="remove-icon" (click)="removeFile(i, 'fq2Name', j)"
+                      (keydown.enter)="removeFile(i, 'fq2Name', j)" style="cursor: pointer;">&#10005;</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="remove-button-container">
+              <button *ngIf="allSamplesData.samples.length > 1" mat-raised-button class="compact-remove-button"
+                type="button" (click)="removeSample(i)">
+                Remove Sample
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="button-container">
+        <div class="button-row">
+          <button mat-raised-button class="back-button" [disabled]="loadingOnSavingAlignment" (click)="goBack()"
+            color="warn">
+            Back</button>
+          <button *ngIf="remainingIds.length  > 0" mat-raised-button class="add-sample-button" color="primary"
+            type="button" (click)="addSample()">
+            Add another sample
+          </button>
+        </div>
+        <button mat-raised-button class="submit-button" color="primary" type="submit" (click)="goToSummary(stepper)">
+          Submit All
+        </button>
+      </div>
+    </mat-step>
+    <mat-step label="Alignment">
+      <div class="recap-step-content">
+        <div *ngIf="selectedMetadataFileDetails " class="metadata-container">
+          <h3 class="metadata-title"> <span style=" color: black;">Selected File Details: </span> {{
+            selectedMetadataFileDetails }}</h3>
+          <div class="metadata-grid">
+            <div class="metadata-row">
+              <div class="metadata-item">
+                <span class="metadata-label">Cellular Resolution:</span>
+                <span class="metadata-value">{{ allSamplesData.cellularResolution }}</span>
+              </div>
+              <div class="metadata-item">
+                <span class="metadata-label">Omics Modality:</span>
+                <span class="metadata-value">{{ allSamplesData.omicsModality }}</span>
+              </div>
+            </div>
+            <div class="metadata-row">
+              <div class="metadata-item">
+                <span class="metadata-label">Organism:</span>
+                <span class="metadata-value">{{ allSamplesData.selectedOrganism }}</span>
+              </div>
+              <div class="metadata-item">
+                <span class="metadata-label">Protocol:</span>
+                <span class="metadata-value">{{ allSamplesData.selectedProtocol }}</span>
+              </div>
+            </div>
+            <div class="metadata-row">
+              <div class="metadata-item full-width">
+                <span class="metadata-label">Aligner:</span>
+                <span class="metadata-value">{{ selectedAligner }}</span>
+              </div>
+            </div>
+            <div class="metadata-row">
+              <div class="metadata-item full-width">
+                <span class="metadata-label">Annotation:</span>
+                <span class="metadata-value">{{ this.allSamplesData.annotation }}</span>
+              </div>
+            </div>
+            <div class="metadata-row">
+              <div class="metadata-item full-width">
+                <span class="metadata-label">Genome:</span>
+                <span class="metadata-value">{{ this.allSamplesData.genome }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="samples-container">
+            <div *ngFor="let sample of allSamplesData.samples; let i = index" class="sample-card">
+              <h4 class="sample-title">Sample {{ i + 1 }}: {{ sample.sampleName }}</h4>
+              <p class="sample-info">
+                <span class="info-label">Sequencing Type:</span>
+                <span class="info-value">{{ sample.selectedSequencingType }}</span>
+              </p>
+              <div class="fastq-files">
+                <p class="fastq-label">fastq 1:</p>
+                <ul class="file-list">
+                  <li *ngFor="let file of sample.fq1Files" class="file-item">
+                    {{ file }}
+                  </li>
+                </ul>
+              </div>
+              <div *ngIf="sample.selectedSequencingType === 'pairedEnd'" class="fastq-files">
+                <p class="fastq-label">fastq 2:</p>
+                <ul class="file-list">
+                  <li *ngFor="let file of sample.fq2Files" class="file-item">
+                    {{ file }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <app-error [errors]="errors" [dismissible]="true" type="alert"></app-error>
+          <div *ngIf="loadingOnSavingAlignment" class="loading">
+            <p>Loading... Please wait.</p>
+          </div>
+        </div>
+      </div>
+      <div class="button-container">
+        <div class="button-row">
+          <button mat-raised-button class="back-button" [disabled]="loadingOnSavingAlignment" (click)="goBack()"
+            color="warn">
+            Back</button>
+          <button mat-raised-button class="submit-button" color="primary" type="submit" (click)="onAlignmentSubmit()"
+            [disabled]="loadingOnSavingAlignment">
+            Submit</button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-card>
+<mat-card class="analysis-container overflow-hidden" *ngIf="isParametersSubmited">
+  <mat-card-content>
+    <mat-card-title class="m-b-4">Analysis </mat-card-title>
+    <br>
+    <span class="bg-light-success text-success rounded ">
+      Your Analysis Parameters are uploaded successfully please wait for the result soon
+    </span>
+  </mat-card-content>
+  <mat-card-title class="m-b-4">
+    <span> Do you want to run another Analysis</span>
+    <button type="button" class="button refresh" (click)="refreshPage()">Run another analysis</button>
+  </mat-card-title>
+</mat-card>
+<mat-card class="experiment-container">
+  <mat-card-content>
+    <mat-card-title class="m-b-4" style="display: flex; align-items: center; gap: 8px; margin-left: 15px;">
+      All Alignment Experiments
+      <button mat-icon-button (click)="manualRefresh()" matTooltip="Refresh Data" class="refresh-button">
+        <mat-icon class="refresh-icon">refresh</mat-icon>
+      </button>
+    </mat-card-title>
+    <div class="filters-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Search Experiment Name</mat-label>
+        <input matInput (keyup)="applyFilter($event, 'experimentName')" placeholder="Search by Name">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Search Status</mat-label>
+        <mat-select [(ngModel)]="searchFilters['status']" (selectionChange)="applyFilter($event.value, 'status')"
+          placeholder="Select Status">
+          <mat-option value="">All</mat-option>
+          <mat-option value="in_evaluation">In Evaluation</mat-option>
+          <mat-option value="in_progress">In Progress</mat-option>
+          <mat-option value="done">Done</mat-option>
+          <mat-option value="error">Error</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="warn" (click)="resetFilters()">Reset Filters</button>
+    </div>
+    <div class="experiment-grid">
+      <div *ngFor="let experiment of newPagedExperiments" class="experiment-card"
+        [ngClass]="[getStatusClass(experiment.status)]">
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="downloadJson(experiment)">
+            <mat-icon>download</mat-icon> Download parameters
+          </button>
+        </mat-menu>
+        <h3>{{ experiment.metadataFileName }}</h3>
+        <p><strong>Omics Modality:</strong> {{ experiment.omicsModality }}</p>
+        <p><strong>Cellular Resolution:</strong> {{ experiment.cellularResolution }}</p>
+        <p><strong>Step:</strong> {{ experiment.experimentType }}</p>
+        <p><strong>Status:</strong> {{ experiment.status | statusFormat}}</p>
+        <p><strong>createdAt:</strong> {{ experiment.createdAt }}</p>
+        <div class="experiment-actions">
+          <button *ngIf="experiment.experimentType === 'Alignment' && experiment.status !== 'Error'"
+            (click)="viewHtml(experiment.experimentName)" [disabled]="experiment.status !== 'Done'">View
+            MultiQC</button>
+          <button *ngIf="experiment.experimentType === 'Alignment' && experiment.status !== 'Error'"
+            (click)="downloadAllMatrices(experiment.experimentName)" [disabled]="experiment.status !== 'Done'">Download
+            Raw Matrix</button>
+        </div>
+      </div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

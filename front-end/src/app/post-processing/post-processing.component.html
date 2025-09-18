@@ -1,0 +1,162 @@
+<mat-card class="analysis-container" *ngIf="!isParametersSubmited">
+  <mat-card-title class="m-b-4" style="display: flex; align-items: center; gap: 8px; margin-left: 15px;">
+    Add new post-processing
+  </mat-card-title>
+  <mat-horizontal-stepper #stepper linear>
+    <mat-step label="Select an Experiment" [editable]="false">
+      <div class="file-selection-container" *ngIf="alignmentExperiments$ | async as alignmentExperiments">
+        <div class="file-dropdown">
+          <p>Please select an experiment:</p>
+          <mat-select [(value)]="selectedExperiment" placeholder="Select an experiment" style=" border: 1px solid #ccc;
+                border-radius: 4px; ">
+            <mat-option *ngIf="alignmentExperiments.length === 0" disabled>Loading experiments...</mat-option>
+            <mat-option *ngFor="let experiment of alignmentExperiments" [value]="experiment">
+              {{ experiment.experimentName }}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" type="submit" (click)="goToNextStep(stepper)"
+        [disabled]="!selectedExperiment " style="margin-top: 20px;">
+        Next</button>
+    </mat-step>
+    <mat-step label="Post-Processing" [editable]="false">
+      <form #analysisForm="ngForm">
+        <p>Selected metadata: {{selectedMetadataFileDetails}}</p>
+        <div class="matrix-input-container">
+          <label for="matrice">Alignment Experiment Name :</label> {{selectedAlignmentExperimentName }}
+        </div>
+        <div class="form-group">
+          <label for="minGenesByCells">Minimum Genes by Cells:</label>
+          <input type="number" id="minGenesByCells" name="minGenesByCells" [(ngModel)]="formData.minGenesByCells"
+            [ngClass]="{'is-invalid': formErrors.minGenesByCells}" required min="0" class="form-control">
+          <div class="invalid-feedback" *ngIf="formErrors.minGenesByCells">
+            {{ formErrors.minGenesByCells }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="minCellsExpressingGene">Minimum Cells Expressing a Gene:</label>
+          <input type="number" id="minCellsExpressingGene" name="minCellsExpressingGene"
+            [(ngModel)]="formData.minCellsExpressingGene" [ngClass]="{'is-invalid': formErrors.minCellsExpressingGene}"
+            required min="0" class="form-control">
+          <div class="invalid-feedback" *ngIf="formErrors.minCellsExpressingGene">
+            {{ formErrors.minCellsExpressingGene }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="numHighVariableGenes">Number of High Variable Genes:</label>
+          <input type="number" id="numHighVariableGenes" name="numHighVariableGenes"
+            [(ngModel)]="formData.numHighVariableGenes" [ngClass]="{'is-invalid': formErrors.numHighVariableGenes}"
+            required min="0" class="form-control">
+          <div class="invalid-feedback" *ngIf="formErrors.numHighVariableGenes">
+            {{ formErrors.numHighVariableGenes }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dimensionReduction">Dimension Reduction:</label>
+          <div *ngFor="let option of dimensionReductionOptions" class="form-check d-flex align-items-center">
+            <input type="checkbox" id="dimensionReduction_{{ option }}" [value]="option"
+              (change)="onCheckboxChange(option, 'dimensionReduction', $event)"
+              [checked]="formData.dimensionReduction.includes(option)" class="form-check-input me-2" />
+            <label class="form-check-label" for="dimensionReduction_{{ option }}">{{ option
+              }}</label>
+          </div>
+          <div class="invalid-feedback" *ngIf="formErrors.dimensionReduction">
+            {{ formErrors.dimensionReduction }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="clustering">Clustering:</label>
+          <div *ngFor="let option of clusteringOptions" class="form-check d-flex align-items-center">
+            <input type="checkbox" id="clustering_{{ option }}" [value]="option"
+              (change)="onCheckboxChange(option, 'clustering', $event)" [checked]="formData.clustering.includes(option)"
+              class="form-check-input me-2" />
+            <label class="form-check-label" for="clustering_{{ option }}">{{ option | titlecase }}</label>
+          </div>
+          <div class="invalid-feedback" *ngIf="formErrors.clustering">
+            {{ formErrors.clustering }}
+          </div>
+        </div>
+        <div *ngIf="loading" class="loading">
+          <p>Loading... Please wait.</p>
+        </div>
+        <button type="submit" (click)="onPostProcessingSubmit($event)" [disabled]="loading"
+          class="btn btn-primary">Submit</button>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-card>
+
+<mat-card class="analysis-container overflow-hidden" *ngIf="isParametersSubmited">
+  <mat-card-content>
+    <mat-card-title class="m-b-4">Analysis </mat-card-title>
+    <br>
+    <span class="bg-light-success text-success rounded ">
+      Your Analysis Parameters are uploaded successfully please wait for the result soon
+    </span>
+  </mat-card-content>
+  <mat-card-title class="m-b-4">
+    <span> Do you want to run another Analysis</span>
+    <button type="button" class="button refresh" (click)="refreshPage()">Run another analysis</button>
+  </mat-card-title>
+</mat-card>
+
+<mat-card class="experiment-container">
+  <mat-card-content>
+    <mat-card-title class="m-b-4" style="display: flex; align-items: center; gap: 8px; margin-left: 15px;">
+      All Post-Processing Experiments
+      <button mat-icon-button (click)="manualRefresh()" matTooltip="Refresh Data" class="refresh-button">
+        <mat-icon class="refresh-icon">refresh</mat-icon>
+      </button>
+    </mat-card-title>
+    <div class="filters-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Search Experiment Name</mat-label>
+        <input matInput (keyup)="applyFilter($event, 'experimentName')" placeholder="Search by Name">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Search Status</mat-label>
+        <mat-select [(ngModel)]="searchFilters['status']" (selectionChange)="applyFilter($event.value, 'status')"
+          placeholder="Select Status">
+          <mat-option value="">All</mat-option>
+          <mat-option value="in_evaluation">In Evaluation</mat-option>
+          <mat-option value="in_progress">In Progress</mat-option>
+          <mat-option value="done">Done</mat-option>
+          <mat-option value="error">Error</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="warn" (click)="resetFilters()">Reset Filters</button>
+    </div>
+    <div *ngIf="newPagedExperiments" class="experiment-grid">
+      <div *ngFor="let experiment of newPagedExperiments" class="experiment-card"
+        [ngClass]="[getStatusClass(experiment.status)]">
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="downloadJson(experiment)">
+            <mat-icon>download</mat-icon> Download parameters
+          </button>
+        </mat-menu>
+        <h3>{{ experiment.metadataFileName }}</h3>
+        <p><strong>Omics Modality:</strong> {{ experiment.omicsModality }}</p>
+        <p><strong>Cellular Resolution:</strong> {{ experiment.cellularResolution }}</p>
+        <p><strong>Step:</strong> {{ experiment.experimentType }}</p>
+        <p><strong>Status:</strong> {{ experiment.status | statusFormat }}</p>
+        <p><strong>createdAt:</strong> {{ experiment.createdAt }}</p>
+        <div class="button-container">
+          <button *ngIf="experiment.status !== 'Error'" mat-raised-button color="primary" class="visualize-button"
+            (click)="downloadMatrix(experiment.experimentName)" [disabled]="experiment.status !== 'Done'">
+            <mat-icon>download</mat-icon> Processed Matrix
+          </button>
+          <button *ngIf="experiment.status !== 'Error'" mat-raised-button color="primary" class="visualize-button"
+            [disabled]="experiment.status !== 'Done'" (click)="openVisualizationN(experiment.experimentName)">
+            <mat-icon>visibility</mat-icon> Visualize
+          </button>
+        </div>
+      </div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

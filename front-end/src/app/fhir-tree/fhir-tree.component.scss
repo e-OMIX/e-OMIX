@@ -1,0 +1,611 @@
+/* ==========================================================================
+   1. Variables
+   ========================================================================== */
+
+// Colors
+$primary-color: #1976d2;
+$secondary-color: #7b1fa2;
+$success-color: #2e7d32;
+$warning-color: #f57c00;
+$error-color: #d32f2f;
+$background-color: #fafafa;
+$text-primary: #333;
+$text-secondary: #666;
+$text-muted: #757575;
+$border-color: #e0e0e0;
+$white: #ffffff;
+
+// Typography
+$font-size-xs: 11px;
+$font-size-sm: 13px;
+$font-size-md: 14px;
+$font-size-lg: 16px;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 20px;
+
+// Borders
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+/* ==========================================================================
+   2. Mixins
+   ========================================================================== */
+
+// Mixin for common node styles (Molecular, Batch, Specimen)
+@mixin resource-node-style($bg, $border, $radius, $padding, $margin) {
+  background-color: $bg;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $padding;
+  margin-bottom: $margin;
+}
+
+// Mixin for patient info boxes
+@mixin info-box($border-color, $label-color) {
+  margin-top: $spacing-sm - 2px;
+  padding: $spacing-sm - 2px $spacing-sm;
+  background-color: rgba($white, 0.8);
+  border-radius: $border-radius-sm;
+  border-left: 3px solid $border-color;
+
+  .label {
+    display: block;
+    font-weight: 600;
+    font-size: $font-size-xs;
+    color: $label-color;
+    margin-bottom: $spacing-xs / 2;
+  }
+
+  .details {
+    font-size: $font-size-xs;
+    color: $text-primary;
+    line-height: 1.3;
+  }
+}
+
+// Mixin for the base style of the mat-select trigger element
+@mixin select-trigger-base {
+  border-radius: $border-radius-sm;
+  padding: 0 10px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================================================================
+   3. Base & Reusable Component Styles
+   ========================================================================== */
+
+.cardWithShadow {
+  margin: $spacing-lg;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: $border-radius-md;
+  overflow: hidden;
+}
+
+mat-card-content {
+  padding: $spacing-xl;
+}
+
+.mat-mdc-card-subtitle {
+  color: $text-secondary;
+  font-size: $font-size-md;
+  margin-top: $spacing-sm;
+  font-weight: 500;
+}
+
+.badge {
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-lg;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+
+  &.badge-primary {
+    background-color: $primary-color;
+    color: $white;
+  }
+
+  &.badge-secondary {
+    background-color: $secondary-color;
+    color: $white;
+  }
+}
+
+.accession-badge {
+  padding: $spacing-xs $spacing-sm;
+  background-color: rgba($white, 0.8);
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  color: $text-primary;
+  border: 1px solid $border-color;
+  font-family: monospace;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px $spacing-xl;
+  color: $text-secondary;
+
+  .empty-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: $spacing-lg;
+    color: #bdbdbd;
+  }
+
+  p {
+    margin: 0;
+    font-size: $font-size-lg;
+    font-weight: 500;
+  }
+}
+
+/* ==========================================================================
+   4. File Dropdown Component
+   ========================================================================== */
+
+.file-dropdown {
+  margin-bottom: $spacing-xl;
+  width: 100%;
+
+  .file-selector-container {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+
+    .file-label {
+      font-weight: 500;
+      color: $text-primary;
+      font-size: $font-size-md;
+      white-space: nowrap;
+      margin: 0;
+    }
+
+    .file-select {
+      min-width: 180px;
+      max-width: 300px;
+    }
+
+    &.vertical {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-sm;
+
+      .file-label {
+        margin-bottom: $spacing-xs;
+      }
+
+      .file-select {
+        width: 100%;
+      }
+    }
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    margin-top: $spacing-md;
+    color: $text-secondary;
+
+    mat-spinner circle {
+      stroke: $primary-color;
+    }
+
+    mat-spinner {
+      margin-right: $spacing-sm;
+    }
+
+    p {
+      margin: 0;
+      font-size: $font-size-md;
+    }
+  }
+}
+
+// Place in title without margin
+mat-card-title .file-dropdown {
+  margin: 0;
+}
+
+/* ==========================================================================
+   5. FHIR Tree Component
+   ========================================================================== */
+
+.tree-container {
+  margin-top: $spacing-xl;
+  padding: $spacing-lg;
+  background-color: $background-color;
+  border-radius: $border-radius-md;
+  border: 1px solid $border-color;
+}
+
+.fhir-tree {
+  background: transparent;
+
+  .mat-tree-node {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $border-color;
+    transition: all 0.2s ease-in-out;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      transform: translateX(2px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .node-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  .node-title {
+    font-weight: 600;
+    color: $text-primary;
+    font-size: $font-size-md;
+    line-height: 1.3;
+  }
+
+  .node-subtitle {
+    font-size: 12px;
+    color: $text-secondary;
+    line-height: 1.2;
+  }
+}
+
+// -- Tree Node Types --
+
+.molecular-sequence-node {
+  @include resource-node-style(#e3f2fd, #bbdefb, $border-radius-md, $spacing-md, $spacing-sm);
+
+  .sequence-details {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin-top: $spacing-sm;
+    flex-wrap: wrap;
+  }
+}
+
+.batch-node {
+  @include resource-node-style(#f3e5f5, #e1bee7, 6px, 10px, 6px);
+
+  .batch-details {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+}
+
+.specimen-node {
+  @include resource-node-style(#e8f5e8, #c8e6c9, $border-radius-sm, $spacing-sm, $spacing-xs);
+
+  .patient-info {
+    @include info-box($success-color, $success-color);
+
+    .details span {
+      display: inline-block;
+      margin-right: $spacing-sm;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .no-patient {
+    @include info-box($text-muted, $text-muted);
+
+    .details {
+      font-style: italic;
+    }
+  }
+}
+
+// -- Tree Structure --
+
+.node-children {
+  margin-left: 40px;
+  border-left: 2px solid $border-color;
+  padding-left: $spacing-lg;
+
+  &.hidden {
+    display: none;
+  }
+
+  >mat-nested-tree-node {
+    margin-top: $spacing-xs;
+  }
+}
+
+// CORRECTED: This block specifically styles the patient detail rows from your HTML.
+.patient-children {
+
+  // Styles for the "Patient Info" box
+  .detail-node.patient-detail {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 6px 12px; // Adjusted padding for better alignment
+    margin-bottom: $spacing-xs;
+    border-radius: $border-radius-sm;
+    border-left: 3px solid $success-color;
+    background-color: #f1f8e9; // Light green background
+
+    .patient-label {
+      font-weight: 600;
+      font-size: $font-size-xs;
+      color: $success-color;
+      margin-right: $spacing-sm;
+      flex-shrink: 0; // Prevent the label from shrinking
+    }
+
+    .patient-details {
+      font-size: $font-size-xs;
+      color: $text-primary;
+      line-height: 1.3;
+      white-space: normal; // Allow wrapping if needed
+    }
+  }
+
+  // Styles for the "No Patient" box
+  .detail-node.no-patient-data {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    padding: $spacing-sm;
+    margin-bottom: $spacing-xs;
+    border-radius: $border-radius-sm;
+    border-left: 3px solid $text-muted;
+    background-color: #f5f5f5; // Muted grey background
+
+    .node-subtitle {
+      color: $text-muted;
+      font-style: italic;
+    }
+  }
+}
+
+/* ==========================================================================
+   6. Angular Material Overrides (Global Scope)
+   ========================================================================== */
+
+// -- Mat Select --
+.file-select {
+  .mat-mdc-select-trigger {
+    .mat-select-disabled & {
+      @include select-trigger-base;
+      background-color: #e9ecef;
+      border: 1px solid #ced4da;
+    }
+
+    &:not(.mat-select-disabled .mat-mdc-select-trigger) {
+      @include select-trigger-base;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+    }
+  }
+
+  &.mat-select-disabled .mat-mdc-select-value {
+    color: #6c757d;
+  }
+
+  .mat-mdc-select-value {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+  }
+
+  .mat-mdc-select-arrow {
+    color: #999;
+  }
+
+  .mat-mdc-select-placeholder {
+    color: #adb5bd !important;
+    font-size: $font-size-sm !important;
+  }
+
+  .mat-mdc-select-value-text {
+    font-size: $font-size-sm !important;
+    color: #495057 !important;
+  }
+}
+
+.mat-mdc-select-panel {
+  z-index: 1000 !important;
+}
+
+mat-option,
+.mat-mdc-option {
+  font-size: $font-size-sm !important;
+  min-height: 32px !important;
+}
+
+mat-select {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  width: 100%;
+  max-width: 400px;
+}
+
+// -- Mat Tree --
+mat-nested-tree-node {
+  display: block;
+  width: 100%;
+
+  >.mat-tree-node {
+    width: 100%;
+  }
+}
+
+.toggle-button {
+  width: 32px;
+  height: 32px;
+  margin-right: $spacing-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
+  }
+}
+
+/* ==========================================================================
+   7. Utility Classes
+   ========================================================================== */
+.m-b-4 {
+  margin-bottom: $spacing-lg;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ==========================================================================
+   8. Font Imports & Icon Base Styles
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.mat-icon {
+  font-family: 'Material Icons', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+}
+
+.mat-icon-rtl-mirror {
+  transform: none;
+}
+
+/* ==========================================================================
+   9. Media Queries
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .cardWithShadow {
+    margin: $spacing-sm;
+  }
+
+  mat-card-content {
+    padding: $spacing-lg;
+  }
+
+  .file-dropdown .file-selector-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+
+    .file-select {
+      min-width: 100%;
+      width: 100%;
+    }
+  }
+
+  .tree-container {
+    padding: $spacing-md;
+    margin-top: $spacing-lg;
+  }
+
+  .node-children,
+  .patient-children {
+    margin-left: 24px !important;
+    padding-left: $spacing-md;
+  }
+
+  .molecular-sequence-node {
+    padding: 10px;
+  }
+
+  .batch-node {
+    padding: $spacing-sm;
+  }
+
+  .specimen-node {
+    padding: 6px;
+  }
+
+  .sequence-details,
+  .batch-details {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  .node-title {
+    font-size: $font-size-sm;
+  }
+
+  .node-subtitle {
+    font-size: $font-size-xs;
+  }
+}
+
+@media (prefers-contrast: high) {
+
+  .molecular-sequence-node,
+  .batch-node,
+  .specimen-node {
+    border: 2px solid #000;
+    background-color: #e0e0e0;
+  }
+
+  .badge {
+    border: 1px solid #000;
+  }
+}

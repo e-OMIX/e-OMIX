@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualization</title>
+    <script>
+        // Extract the Shiny URL from query params
+        const urlParams = new URLSearchParams(window.location.search);
+        const shinyUrl = urlParams.get('shinyUrl');
+
+        // Set up confirmation on tab close
+        window.onbeforeunload = function(e) {
+            e.preventDefault();
+            e.returnValue = 'Are you sure you want to close the visualization?';
+            return e.returnValue;
+        };
+
+        // Redirect to the actual Shiny app (or embed in iframe)
+        window.location.href = shinyUrl;
+        
+        // Alternatively, use an iframe (if Shiny app allows embedding)
+        // document.body.innerHTML = `<iframe src="${shinyUrl}" style="width:100%; height:100vh; border:none;"></iframe>`;
+    </script>
+</head>
+<body>
+    <p>Loading visualization...</p>
+</body>
+</html>

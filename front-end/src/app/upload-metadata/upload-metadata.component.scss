@@ -1,0 +1,265 @@
+/* ==========================================================================
+   Table Component Styles
+   ========================================================================== */
+
+/* --- General & Helper Styles --- */
+.loading {
+  font-size: 16px;
+  color: #ff6692;
+  font-weight: bold;
+}
+
+.text-error {
+  color: #ff0000;
+}
+
+.required-asterisk {
+  color: #ff0000;
+  margin-left: 4px;
+}
+
+.error-help-text {
+  color: #ff0000;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+.error-field {
+  border: 1px solid #ff0000 !important;
+  border-radius: 4px;
+}
+
+.refresh-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  min-width: auto;
+  width: 24px;
+  height: 24px;
+}
+
+.refresh-icon {
+  font-size: 18px;
+}
+
+/* --- Angular Material Overrides & Custom Tooltips --- */
+
+// Use ::ng-deep sparingly. This is for overriding library component styles.
+::ng-deep .mat-tooltip,
+.mdc-tooltip.custom-tooltip .mdc-tooltip__surface {
+  font-size: 14px;
+  white-space: pre-line;
+  max-width: 300px;
+}
+
+.mdc-tooltip.custom-tooltip .mdc-tooltip__surface {
+  background-color: #454545;
+  color: white;
+  text-align: left;
+}
+
+/* --- Table Styles --- */
+
+table.mat-table {
+  width: 100%;
+
+  th.mat-header-cell {
+    color: #8965e5;
+    text-align: center;
+  }
+
+  td.mat-cell {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 8px;
+    text-align: left;
+  }
+}
+
+.table-search-input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  background-color: #f8f9fa;
+  outline: none;
+}
+
+
+/* --- Metadata Mapping Form Styles --- */
+
+.metadata-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+
+    .main-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+
+      &.activeMenu {
+        background-color: #87cefa; // Light Sky Blue
+        color: #111c2d;
+      }
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+
+      mat-icon {
+        font-size: 20px;
+      }
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+      padding-left: 8px;
+    }
+
+    .metadata-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metadata-item-content {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+
+    .icon-item {
+      height: 24px;
+      width: 24px;
+    }
+
+    .help-icon {
+      margin-left: auto;
+      color: gray;
+
+      mat-icon {
+        font-size: 16px;
+        height: 16px;
+        width: 16px;
+        vertical-align: middle;
+      }
+    }
+
+    .dropdown-content {
+      display: inline-flex;
+      align-items: center;
+
+      select {
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+
+        &.error-select {
+          border-color: #ff0000 !important;
+          box-shadow: 0 0 0 1px #ff0000 !important;
+        }
+      }
+    }
+  }
+}
+
+
+/* --- Filename Input Field Styles --- */
+.form-field-container {
+  position: relative;
+  margin: 24px 0 16px;
+  display: inline-block;
+
+  .floating-label {
+    position: absolute;
+    top: -13px;
+    left: 12px;
+    background-color: white;
+    padding: 0 4px;
+    font-size: 14px;
+    color: gray;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+
+    .help-icon {
+      font-size: 14px;
+      margin-left: 8px;
+
+      mat-icon {
+        font-size: 16px;
+        height: 16px;
+        width: 16px;
+        line-height: 16px;
+      }
+    }
+  }
+
+  .input-with-icon {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    padding-top: 16px;
+    min-width: 300px;
+    max-width: 500px;
+
+    .input-and-icon {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    input {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      margin-right: 8px;
+      padding: 0; // Remove default padding
+    }
+
+    mat-icon {
+      flex-shrink: 0;
+    }
+
+    .error-container {
+      width: 100%;
+
+      .inner-error {
+        color: #ff0000;
+        font-size: 0.8rem;
+        margin-top: 4px;
+        padding-left: 0;
+      }
+    }
+
+    &.error-field {
+      border-color: red;
+    }
+  }
+}

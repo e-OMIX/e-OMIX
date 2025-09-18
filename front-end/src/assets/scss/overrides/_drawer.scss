@@ -1,0 +1,12 @@
+@use "../variables" as *; // Import variables and make them globally accessible
+
+@mixin styles {
+  .mat-drawer {
+    background-color: $sidebarbg;
+  }
+
+  .mat-drawer-container {
+    background-color: $body-bg;
+    ;
+  }
+}

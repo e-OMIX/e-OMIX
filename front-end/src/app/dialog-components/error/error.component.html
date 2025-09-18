@@ -1,0 +1,9 @@
+<div *ngIf="errors.length > 0" [class]="type === 'toast' ? 'error-toast-container' : 'error-alert-container'">
+  <div *ngFor="let error of errors; let i = index" class="error-message" [class.alert]="type === 'alert'"
+    [class.toast]="type === 'toast'">
+    <span>{{ error }}</span>
+    <button *ngIf="dismissible" (click)="dismissError(i)" class="dismiss-button">
+      &times;
+    </button>
+  </div>
+</div>

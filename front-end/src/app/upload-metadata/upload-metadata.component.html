@@ -1,0 +1,390 @@
+<mat-card class="cardWithShadow overflow-hidden">
+   <mat-card-content>
+      <mat-card-title *ngIf="!isMappingSubmitted" class="m-b-4">Add new sample metadata</mat-card-title>
+
+      <div *ngIf="filteredData.length > 0 && isMappingSubmitted">
+         <button (click)="refreshPartial()" mat-flat-button color="primary">Add Another Dataset</button>
+      </div>
+      <div *ngIf="isSearchFieldPopulated" class="m-t-10">
+         <button (click)="resetSearchFields()" mat-flat-button color="primary">Reset Filter</button>
+      </div>
+
+      <div *ngIf="!fileUploaded && !isMappingSubmitted" class="m-t-10">
+         <input type="file" (change)="onFileSelected($event)" />
+      </div>
+
+      <div *ngIf="isFileSelected && !isMappingSubmitted">
+         <div class="metadata-container">
+            <span class="mat-body-2" style="color:gray"><span class="text-error">*</span> Required fields are marked
+               with an asterisk</span>
+
+            <div class="form-field-container">
+               <label for="fileName" class="floating-label">
+                  Sample metadata name <span class="required-asterisk">*</span>
+                  <span
+                     matTooltip="Please enter a unique name for your sample metadata. The name must be unique and cannot contain '/' or '\'."
+                     matTooltipClass="custom-tooltip" class="help-icon">
+                     <mat-icon class="material-icons-outlined">help_outline</mat-icon>
+                  </span>
+               </label>
+               <div class="input-with-icon"
+                  [class.error-field]="fileNameExists || emptyFileName || (fileNameInput.invalid && fileNameInput.touched)">
+                  <div class="input-and-icon">
+                     <input type="text" id="fileName" name="fileName" [(ngModel)]="newFileName"
+                        (ngModelChange)="isFileNameUnique()" placeholder="Choose a name for your Metadata" required
+                        pattern="^[^\\/]*$" #fileNameInput="ngModel" />
+                     <mat-icon *ngIf="fileNameInput.valid && fileNameInput.touched && !fileNameExists"
+                        color="primary">sentiment_satisfied</mat-icon>
+                     <mat-icon
+                        *ngIf="fileNameExists || (fileNameInput.invalid && fileNameInput.touched) || emptyFileName"
+                        class="text-error">sentiment_dissatisfied</mat-icon>
+                     <mat-icon
+                        *ngIf="fileNameInput.pristine && !emptyFileName && !fileNameExists">sentiment_neutral</mat-icon>
+                  </div>
+                  <div class="error-container">
+                     <div *ngIf="fileNameInput.errors?.['pattern']" class="error-help-text inner-error">Filename cannot
+                        contain '/' or '\'.</div>
+                     <div *ngIf="fileNameExists" class="error-help-text inner-error">This name already exists. Please
+                        choose another.</div>
+                     <div *ngIf="emptyFileName" class="error-help-text inner-error">Filename cannot be empty.</div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="button-group">
+               <button class="main-button mat-primary" [ngClass]="{ 'activeMenu': showSections['sequencing'] }"
+                  (click)="toggleSection('sequencing')"
+                  [class.error-field]="errorStates.sequenceType || errorStates.cellularResolution">
+                  <img src="assets/images/icons/sequencing.png" alt="Icon" class="icon-item" />
+                  Assay <span class="required-asterisk">*</span>
+                  <span class="help-icon" matTooltip="Assay is the type of sequencing performed on the sample."
+                     matTooltipClass="custom-tooltip">
+                     <mat-icon class="material-icons-outlined">help_outline</mat-icon>
+                  </span>
+               </button>
+               <div *ngIf="showSections['sequencing']" class="button-row">
+                  <div class="metadata-item">
+                     <div class="metadata-item-content">
+                        <img src="assets/images/icons/sampling.png" alt="Icon" class="icon-item" /> Cellular Resolution
+                        : <span class="required-asterisk">*</span>
+                        <div class="dropdown-content" [class.error-select]="errorStates.cellularResolution">
+                           <select name="cellularResolution" [(ngModel)]="selectedMappings['cellularResolution']"
+                              (change)="selectHeader($event,'cellularResolution')" required>
+                              <option disabled>Select Cellular Resolution</option>
+                              <option value="Bulk">Bulk</option>
+                              <option value="Single Cell">Single Cell</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="metadata-item">
+                     <div class="metadata-item-content">
+                        <img src="assets/images/icons/sampling.png" alt="Icon" class="icon-item" /> Omics modality:
+                        <span class="required-asterisk">*</span>
+                        <div class="dropdown-content" [class.error-select]="errorStates.sequenceType">
+                           <select name="sequenceType" [(ngModel)]="selectedMappings['sequenceType']"
+                              (change)="selectHeader($event,'sequenceType')" required>
+                              <option disabled>Select Omics modality</option>
+                              <option value="dna">DNA</option>
+                              <option value="rna">RNA</option>
+                              <option value="aa">Protein</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="button-group">
+               <button class="main-button mat-primary" [ngClass]="{ 'activeMenu': showSections['patient'] }"
+                  (click)="toggleSection('patient')" [class.error-field]="errorStates.standardized_species">
+                  <mat-icon>person</mat-icon> Subject <span class="required-asterisk">*</span>
+                  <span class="help-icon" matTooltip="Subject is the individual from which the sample is derived."
+                     matTooltipClass="custom-tooltip">
+                     <mat-icon class="material-icons-outlined">help_outline</mat-icon>
+                  </span>
+               </button>
+               <div *ngIf="showSections['patient']" class="button-row">
+                  <div class="metadata-item">
+                     <div class="metadata-item-content">
+                        <mat-icon class="metadata-icon">person</mat-icon> Subject ID:
+                        <div class="dropdown-content">
+                           <select name="patient_id" [(ngModel)]="selectedMappings['patient_id']"
+                              (change)="selectHeader($event, 'patient_id')">
+                              <option disabled>Select Subject ID</option>
+                              <option *ngFor="let header of tableHeaders" [value]="header">{{ header }}</option>
+                              <option value="Unknown">Unknown</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="metadata-item">
+                     <div class="metadata-item-content">
+                        <img src="assets/images/icons/age.png" alt="Icon" class="icon-item" /> Age:
+                        <div class="dropdown-content">
+                           <select name="age" [(ngModel)]="selectedMappings['age']"
+                              (change)="selectHeader($event, 'age')">
+                              <option disabled>Select Age</option>
+                              <option *ngFor="let header of tableHeaders" [value]="header">{{ header }}</option>
+                              <option value="Unknown">Unknown</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="metadata-item">
+                     <div class="metadata-item-content">
+                        <img src="assets/images/icons/gender.png" alt="Icon" class="icon-item" /> Gender:
+                        <div class="dropdown-content">
+                           <select name="gender" [(ngModel)]="selectedMappings['gender']"
+                              (change)="selectHeader($event, 'gender')">
+                              <option disabled>Select Gender</option>
+                              <option *ngFor="let header of tableHeaders" [value]="header">{{ header }}</option>
+                              <option value="Unknown">Unknown</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="metadata-item">
+                     <div class="metadata-item-content">
+                        <mat-icon class="metadata-icon">pets</mat-icon> Species:<span class="required-asterisk">*</span>
+                        <div class="dropdown-content" [class.error-select]="errorStates.standardized_species">
+                           <select name="standardized_species" [(ngModel)]="selectedMappings['standardized_species']"
+                              (change)="selectHeader($event, 'standardized_species')" required>
+                              <option disabled>Select Species</option>
+                              <option value="Mus_musculus">Mus musculus</option>
+                              <option value="Homo_sapiens">Homo sapiens</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="button-group">
+               <button class="main-button mat-primary" [ngClass]="{ 'activeMenu': showSections['sample'] }"
+                  (click)="toggleSection('sample')"
+                  [class.error-field]="errorStates.sample_id || errorStates.protocol || errorStates.organ || errorStates.disorder">
+                  <img src="assets/images/icons/samples.png" alt="Icon" class="icon-item" /> Sample <span
+                     class="required-asterisk">*</span>
+                  <span class="help-icon" matTooltip="Sample is the biological material collected from the subject."
+                     matTooltipClass="custom-tooltip">
+                     <mat-icon class="material-icons-outlined">help_outline</mat-icon>
+                  </span>
+               </button>
+               <div *ngIf="showSections['sample']" class="button-row">
+                  <div class="metadata-item">
+                     <div class="metadata-item-content">
+                        <img src="assets/images/icons/sampleId.png" alt="Icon" class="icon-item" /> Sample ID: <span
+                           class="required-asterisk">*</span>
+                        <div class="dropdown-content" [class.error-select]="errorStates.sample_id">
+                           <select name="sample_id" [(ngModel)]="selectedMappings['sample_id']"
+                              (change)="selectHeader($event, 'sample_id')" required>
+                              <option disabled>Select Sample ID</option>
+                              <option *ngFor="let header of tableHeaders" [value]="header">{{ header }}</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+                  <div *ngIf="selectedMappings['cellularResolution'] !== 'Bulk'" class="metadata-item">
+                     <div class="metadata-item-content">
+                        <img src="assets/images/icons/sampling.png" alt="Icon" class="icon-item" /> Protocol: <span
+                           *ngIf="selectedMappings['cellularResolution'] === 'Single Cell'"
+                           class="required-asterisk">*</span>
+                        <div class="dropdown-content" [class.error-select]="errorStates.protocol">
+                           <select name="protocol" [(ngModel)]="selectedMappings['protocol']"
+                              (change)="selectHeader($event, 'protocol')"
+                              [required]="selectedMappings['cellularResolution'] === 'Single Cell'">
+                              <option disabled>Select Protocol</option>
+                              <option *ngFor="let protocol of getProtocolOptions()" [value]="protocol">{{ protocol }}
+                              </option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="metadata-item">
+                     <div class="metadata-item-content">
+                        <img src="assets/images/icons/organ.png" alt="Icon" class="icon-item" /> Organ: <span
+                           class="required-asterisk">*</span>
+                        <div class="dropdown-content" [class.error-select]="errorStates.organ">
+                           <select name="organ" [(ngModel)]="selectedMappings['organ']"
+                              (change)="selectHeader($event, 'organ')" required>
+                              <option disabled>Select Organ</option>
+                              <option *ngFor="let header of tableHeaders" [value]="header">{{ header }}</option>
+                              <option value="Unknown">Unknown</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="metadata-item">
+                     <div class="metadata-item-content">
+                        <img src="assets/images/icons/disorders.png" alt="Icon" class="icon-item" /> Disorder: <span
+                           class="required-asterisk">*</span>
+                        <div class="dropdown-content" [class.error-select]="errorStates.disorder">
+                           <select name="disorder" [(ngModel)]="selectedMappings['disorder']"
+                              (change)="selectHeader($event, 'disorder')" required>
+                              <option disabled>Select Disorder</option>
+                              <option *ngFor="let header of tableHeaders" [value]="header">{{ header }}</option>
+                              <option value="Unknown">Unknown</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="metadata-item">
+                     <div class="metadata-item-content">
+                        <mat-icon class="metadata-icon">group_work</mat-icon> Batch:
+                        <div class="dropdown-content">
+                           <select name="batch" [(ngModel)]="selectedMappings['batch']"
+                              (change)="selectHeader($event, 'batch')">
+                              <option disabled>Select Batch</option>
+                              <option *ngFor="let header of tableHeaders" [value]="header">{{ header }}</option>
+                              <option value="Unknown">Unknown</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <br>
+         <div *ngIf="uploadLoading" class="loading">
+            <p>Loading... Please wait.</p>
+         </div>
+         <div *ngIf="errorMessage" class="error-help-text">
+            {{ errorMessage }}
+         </div>
+         <button (click)="submitMappings()" mat-flat-button color="primary" [disabled]="uploadLoading">Upload</button>
+      </div>
+   </mat-card-content>
+
+   <mat-card-content *ngIf="filteredData.length > 0">
+      <mat-card-title class="m-b-4">File summary</mat-card-title>
+      <div class="table-responsive">
+         <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="newDataSource" class="w-100">
+               <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+                  <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14" style=" color: #8965e5;">
+                     <div style="display: flex; flex-direction: column;">
+                        <span>{{ column }}</span>
+                        <input [(ngModel)]="searchTerms[column]" placeholder="Search..." (input)="filterData()"
+                           class="table-search-input" />
+                     </div>
+                  </th>
+                  <td mat-cell *matCellDef="let row"> {{ row[column] }} </td>
+               </ng-container>
+               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+               <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator #fileSummaryPaginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+         </div>
+      </div>
+   </mat-card-content>
+</mat-card>
+
+<mat-card class="cardWithShadow overflow-hidden">
+   <mat-card-content>
+      <mat-card-title class="m-b-4" style="display: flex; align-items: center; gap: 8px;">
+         Sample metadata
+         <button mat-icon-button (click)="manualRefresh()" matTooltip="Refresh Data" class="refresh-button">
+            <mat-icon class="refresh-icon">refresh</mat-icon>
+         </button>
+      </mat-card-title>
+      <div *ngIf="loadingOnExport || loadingOnDelete || loadingFileFetching" class="loading">
+         <p>Loading... Please wait.</p>
+      </div>
+   </mat-card-content>
+   <div class="table-responsive">
+      <table mat-table *ngIf="files.length > 0; else noFiles" [dataSource]="filesDataSource" class="w-100">
+         <ng-container matColumnDef="filename">
+            <th mat-header-cell *matHeaderCellDef style=" color: #8965e5;">
+               Dataset Name
+               <input matInput (keyup)="applyTableFilter($event, 'filename')" placeholder="Search..."
+                  class="table-search-input">
+            </th>
+            <td mat-cell *matCellDef="let element" matTooltip="{{ element.filename }}">{{
+               element.filename.replace('.csv', '') }}</td>
+         </ng-container>
+         <ng-container matColumnDef="cellularResolution">
+            <th mat-header-cell *matHeaderCellDef style=" color: #8965e5;">
+               <div style="display: flex; flex-direction: column;">
+                  Cellular Resolution
+                  <mat-select (selectionChange)="applyTableFilter($event.value, 'cellularResolution')"
+                     placeholder="Select">
+                     <mat-option value="">All</mat-option>
+                     <mat-option value="Bulk">Bulk</mat-option>
+                     <mat-option value="Single Cell">Single Cell</mat-option>
+                  </mat-select>
+               </div>
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.cellularResolution }}</td>
+         </ng-container>
+         <ng-container matColumnDef="omicsModality">
+            <th mat-header-cell *matHeaderCellDef style=" color: #8965e5;">
+               <div style="display: flex; flex-direction: column;">
+                  Omics Modality
+                  <mat-select (selectionChange)="applyTableFilter($event.value, 'omicsModality')" placeholder="Select">
+                     <mat-option value="">All</mat-option>
+                     <mat-option value="dna">DNA</mat-option>
+                     <mat-option value="rna">RNA</mat-option>
+                     <mat-option value="aa">Protein</mat-option>
+                  </mat-select>
+               </div>
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.omicsModality }}</td>
+         </ng-container>
+         <ng-container matColumnDef="organ">
+            <th mat-header-cell *matHeaderCellDef style=" color: #8965e5;">
+               Organ
+               <input matInput (keyup)="applyTableFilter($event, 'organ')" placeholder="Search..."
+                  class="table-search-input">
+            </th>
+            <td mat-cell *matCellDef="let element" [matTooltip]="getTooltipText(element.organ)">
+               {{ element.organ.length === 1 ? getTooltipText(element.organ) : element.organ.length + ' organs' }}
+            </td>
+         </ng-container>
+         <ng-container matColumnDef="disorder">
+            <th mat-header-cell *matHeaderCellDef style=" color: #8965e5;">
+               Disorder
+               <input matInput (keyup)="applyTableFilter($event, 'disorder')" placeholder="Search..."
+                  class="table-search-input">
+            </th>
+            <td mat-cell *matCellDef="let element" [matTooltip]="getTooltipText(element.disorder)">
+               {{ element.disorder.length === 1 ? getTooltipText(element.disorder) : element.disorder.length + '
+               disorders' }}
+            </td>
+         </ng-container>
+         <ng-container matColumnDef="species">
+            <th mat-header-cell *matHeaderCellDef style=" color: #8965e5;">
+               <div style="display: flex; flex-direction: column;">
+                  Species
+                  <mat-select (selectionChange)="applyTableFilter($event.value, 'species')" placeholder="Select">
+                     <mat-option value="">All</mat-option>
+                     <mat-option value="Homo_sapiens">Homo sapiens</mat-option>
+                     <mat-option value="Mus_musculus">Mus musculus</mat-option>
+                  </mat-select>
+               </div>
+            </th>
+            <td mat-cell *matCellDef="let element" [matTooltip]="element.species">{{ element.species }}</td>
+         </ng-container>
+         <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style=" color: #8965e5;"> Actions </th>
+            <td mat-cell *matCellDef="let element">
+               <button mat-icon-button (click)="downloadMetadataFile(element.filename)" [disabled]="loadingOnExport"
+                  matTooltip="Download File">
+                  <mat-icon>download</mat-icon>
+               </button>
+               <button mat-icon-button color="warn" (click)="openDeleteDialog(element)" [disabled]="loadingOnDelete"
+                  matTooltip="Delete File">
+                  <mat-icon>delete</mat-icon>
+               </button>
+            </td>
+         </ng-container>
+         <tr mat-header-row *matHeaderRowDef="displayedDataSetsColumns"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedDataSetsColumns"></tr>
+      </table>
+      <ng-template #noFiles>
+         <mat-card-title *ngIf="!loadingFileFetching" class="mat-mdc-card-subtitle p-24"> No sample metadata
+            available.</mat-card-title>
+      </ng-template>
+   </div>
+   <mat-paginator #datasetsPaginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+</mat-card>

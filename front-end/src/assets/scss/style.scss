@@ -1,0 +1,22 @@
+@use "@angular/material" as mat;
+@use "variables" as *; // Import variables and make them globally accessible
+@use "helpers/color" as color;
+@use "helpers/icon-size" as icon-size;
+
+// Theme colors
+@use "themecolors/default_theme" as theme;
+@use "overrides/materialoverrides" as overrides;
+// Container layout
+@use "container" as container;
+@use "layouts/layouts" as layouts;
+@use "grid/grid" as grid;
+@use "helpers/custom-flex" as custom-flex;
+@use "helpers/index" as helpers;
+
+@use "pages/auth" as auth;
+@use "pages/dashboard" as dashboard;
+
+@include mat.elevation-classes();
+@include mat.app-background();
+@include mat.all-component-themes(theme.$bluetheme); // Use theme.$bluetheme
+

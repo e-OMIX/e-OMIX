@@ -1,0 +1,466 @@
+[
+  {
+    "value": "actinidia_chinensis",
+    "label": "Actinidia Chinensis"
+  },
+  {
+    "value": "aegilops_tauschii",
+    "label": "Aegilops Tauschii"
+  },
+  {
+    "value": "aegilops_umbellulata",
+    "label": "Aegilops Umbellulata"
+  },
+  {
+    "value": "amborella_trichopoda",
+    "label": "Amborella Trichopoda"
+  },
+  {
+    "value": "ananas_comosus",
+    "label": "Ananas Comosus"
+  },
+  {
+    "value": "arabidopsis_halleri",
+    "label": "Arabidopsis Halleri"
+  },
+  {
+    "value": "arabidopsis_lyrata",
+    "label": "Arabidopsis Lyrata"
+  },
+  {
+    "value": "arabidopsis_thaliana",
+    "label": "Arabidopsis Thaliana"
+  },
+  {
+    "value": "arabis_alpina",
+    "label": "Arabis Alpina"
+  },
+  {
+    "value": "arachis_hypogaea",
+    "label": "Arachis Hypogaea"
+  },
+  {
+    "value": "asparagus_officinalis",
+    "label": "Asparagus Officinalis"
+  },
+  {
+    "value": "avena_sativa",
+    "label": "Avena Sativa"
+  },
+  {
+    "value": "beta_vulgaris",
+    "label": "Beta Vulgaris"
+  },
+  {
+    "value": "brachypodium_distachyon",
+    "label": "Brachypodium Distachyon"
+  },
+  {
+    "value": "brassica_juncea",
+    "label": "Brassica Juncea"
+  },
+  {
+    "value": "brassica_napus",
+    "label": "Brassica Napus"
+  },
+  {
+    "value": "brassica_oleracea",
+    "label": "Brassica Oleracea"
+  },
+  {
+    "value": "brassica_rapa",
+    "label": "Brassica Rapa"
+  },
+  {
+    "value": "cajanus_cajan",
+    "label": "Cajanus Cajan"
+  },
+  {
+    "value": "camelina_sativa",
+    "label": "Camelina Sativa"
+  },
+  {
+    "value": "cannabis_sativa",
+    "label": "Cannabis Sativa"
+  },
+  {
+    "value": "capsicum_annuum",
+    "label": "Capsicum Annuum"
+  },
+  {
+    "value": "chara_braunii",
+    "label": "Chara Braunii"
+  },
+  {
+    "value": "chenopodium_quinoa",
+    "label": "Chenopodium Quinoa"
+  },
+  {
+    "value": "chlamydomonas_reinhardtii",
+    "label": "Chlamydomonas Reinhardtii"
+  },
+  {
+    "value": "chondrus_crispus",
+    "label": "Chondrus Crispus"
+  },
+  {
+    "value": "citrullus_lanatus",
+    "label": "Citrullus Lanatus"
+  },
+  {
+    "value": "citrus_clementina",
+    "label": "Citrus Clementina"
+  },
+  {
+    "value": "coffea_canephora",
+    "label": "Coffea Canephora"
+  },
+  {
+    "value": "corchorus_capsularis",
+    "label": "Corchorus Capsularis"
+  },
+  {
+    "value": "corylus_avellana",
+    "label": "Corylus Avellana"
+  },
+  {
+    "value": "corymbia_citriodora",
+    "label": "Corymbia Citriodora"
+  },
+  {
+    "value": "cucumis_melo",
+    "label": "Cucumis Melo"
+  },
+  {
+    "value": "cucumis_sativus",
+    "label": "Cucumis Sativus"
+  },
+  {
+    "value": "cyanidioschyzon_merolae",
+    "label": "Cyanidioschyzon Merolae"
+  },
+  {
+    "value": "cynara_cardunculus",
+    "label": "Cynara Cardunculus"
+  },
+  {
+    "value": "daucus_carota",
+    "label": "Daucus Carota"
+  },
+  {
+    "value": "digitaria_exilis",
+    "label": "Digitaria Exilis"
+  },
+  {
+    "value": "dioscorea_rotundata",
+    "label": "Dioscorea Rotundata"
+  },
+  {
+    "value": "echinochloa_crusgalli",
+    "label": "Echinochloa Crusgalli"
+  },
+  {
+    "value": "eragrostis_curvula",
+    "label": "Eragrostis Curvula"
+  },
+  {
+    "value": "eragrostis_tef",
+    "label": "Eragrostis Tef"
+  },
+  {
+    "value": "eucalyptus_grandis",
+    "label": "Eucalyptus Grandis"
+  },
+  {
+    "value": "eutrema_salsugineum",
+    "label": "Eutrema Salsugineum"
+  },
+  {
+    "value": "ficus_carica",
+    "label": "Ficus Carica"
+  },
+  {
+    "value": "fraxinus_excelsior",
+    "label": "Fraxinus Excelsior"
+  },
+  {
+    "value": "galdieria_sulphuraria",
+    "label": "Galdieria Sulphuraria"
+  },
+  {
+    "value": "glycine_max",
+    "label": "Glycine Max"
+  },
+  {
+    "value": "glycine_soja",
+    "label": "Glycine Soja"
+  },
+  {
+    "value": "gossypium_raimondii",
+    "label": "Gossypium Raimondii"
+  },
+  {
+    "value": "helianthus_annuus",
+    "label": "Helianthus Annuus"
+  },
+  {
+    "value": "hordeum_vulgare",
+    "label": "Hordeum Vulgare"
+  },
+  {
+    "value": "ipomoea_triloba",
+    "label": "Ipomoea Triloba"
+  },
+  {
+    "value": "juglans_regia",
+    "label": "Juglans Regia"
+  },
+  {
+    "value": "kalanchoe_fedtschenkoi",
+    "label": "Kalanchoe Fedtschenkoi"
+  },
+  {
+    "value": "lactuca_sativa",
+    "label": "Lactuca Sativa"
+  },
+  {
+    "value": "lathyrus_sativus",
+    "label": "Lathyrus Sativus"
+  },
+  {
+    "value": "leersia_perrieri",
+    "label": "Leersia Perrieri"
+  },
+  {
+    "value": "lolium_perenne",
+    "label": "Lolium Perenne"
+  },
+  {
+    "value": "lupinus_angustifolius",
+    "label": "Lupinus Angustifolius"
+  },
+  {
+    "value": "malus_domestica",
+    "label": "Malus Domestica"
+  },
+  {
+    "value": "manihot_esculenta",
+    "label": "Manihot Esculenta"
+  },
+  {
+    "value": "marchantia_polymorpha",
+    "label": "Marchantia Polymorpha"
+  },
+  {
+    "value": "medicago_truncatula",
+    "label": "Medicago Truncatula"
+  },
+  {
+    "value": "musa_acuminata",
+    "label": "Musa Acuminata"
+  },
+  {
+    "value": "nicotiana_attenuata",
+    "label": "Nicotiana Attenuata"
+  },
+  {
+    "value": "nymphaea_colorata",
+    "label": "Nymphaea Colorata"
+  },
+  {
+    "value": "olea_europaea",
+    "label": "Olea Europaea"
+  },
+  {
+    "value": "oryza_barthii",
+    "label": "Oryza Barthii"
+  },
+  {
+    "value": "oryza_brachyantha",
+    "label": "Oryza Brachyantha"
+  },
+  {
+    "value": "oryza_glaberrima",
+    "label": "Oryza Glaberrima"
+  },
+  {
+    "value": "oryza_glumipatula",
+    "label": "Oryza Glumipatula"
+  },
+  {
+    "value": "oryza_indica",
+    "label": "Oryza Indica"
+  },
+  {
+    "value": "oryza_longistaminata",
+    "label": "Oryza Longistaminata"
+  },
+  {
+    "value": "oryza_meridionalis",
+    "label": "Oryza Meridionalis"
+  },
+  {
+    "value": "oryza_nivara",
+    "label": "Oryza Nivara"
+  },
+  {
+    "value": "oryza_punctata",
+    "label": "Oryza Punctata"
+  },
+  {
+    "value": "oryza_rufipogon",
+    "label": "Oryza Rufipogon"
+  },
+  {
+    "value": "oryza_sativa",
+    "label": "Oryza Sativa"
+  },
+  {
+    "value": "ostreococcus_lucimarinus",
+    "label": "Ostreococcus Lucimarinus"
+  },
+  {
+    "value": "panicum_hallii",
+    "label": "Panicum Hallii"
+  },
+  {
+    "value": "papaver_somniferum",
+    "label": "Papaver Somniferum"
+  },
+  {
+    "value": "phaseolus_vulgaris",
+    "label": "Phaseolus Vulgaris"
+  },
+  {
+    "value": "physcomitrium_patens",
+    "label": "Physcomitrium Patens"
+  },
+  {
+    "value": "pistacia_vera",
+    "label": "Pistacia Vera"
+  },
+  {
+    "value": "pisum_sativum",
+    "label": "Pisum Sativum"
+  },
+  {
+    "value": "populus_trichocarpa",
+    "label": "Populus Trichocarpa"
+  },
+  {
+    "value": "prunus_avium",
+    "label": "Prunus Avium"
+  },
+  {
+    "value": "prunus_dulcis",
+    "label": "Prunus Dulcis"
+  },
+  {
+    "value": "prunus_persica",
+    "label": "Prunus Persica"
+  },
+  {
+    "value": "quercus_lobata",
+    "label": "Quercus Lobata"
+  },
+  {
+    "value": "quercus_suber",
+    "label": "Quercus Suber"
+  },
+  {
+    "value": "rosa_chinensis",
+    "label": "Rosa Chinensis"
+  },
+  {
+    "value": "saccharum_spontaneum",
+    "label": "Saccharum Spontaneum"
+  },
+  {
+    "value": "secale_cereale",
+    "label": "Secale Cereale"
+  },
+  {
+    "value": "selaginella_moellendorffii",
+    "label": "Selaginella Moellendorffii"
+  },
+  {
+    "value": "sesamum_indicum",
+    "label": "Sesamum Indicum"
+  },
+  {
+    "value": "setaria_italica",
+    "label": "Setaria Italica"
+  },
+  {
+    "value": "setaria_viridis",
+    "label": "Setaria Viridis"
+  },
+  {
+    "value": "solanum_lycopersicum",
+    "label": "Solanum Lycopersicum"
+  },
+  {
+    "value": "solanum_tuberosum",
+    "label": "Solanum Tuberosum"
+  },
+  {
+    "value": "sorghum_bicolor",
+    "label": "Sorghum Bicolor"
+  },
+  {
+    "value": "theobroma_cacao",
+    "label": "Theobroma Cacao"
+  },
+  {
+    "value": "trifolium_pratense",
+    "label": "Trifolium Pratense"
+  },
+  {
+    "value": "triticum_aestivum",
+    "label": "Triticum Aestivum"
+  },
+  {
+    "value": "triticum_dicoccoides",
+    "label": "Triticum Dicoccoides"
+  },
+  {
+    "value": "triticum_spelta",
+    "label": "Triticum Spelta"
+  },
+  {
+    "value": "triticum_timopheevii",
+    "label": "Triticum Timopheevii"
+  },
+  {
+    "value": "triticum_turgidum",
+    "label": "Triticum Turgidum"
+  },
+  {
+    "value": "triticum_urartu",
+    "label": "Triticum Urartu"
+  },
+  {
+    "value": "vicia_faba",
+    "label": "Vicia Faba"
+  },
+  {
+    "value": "vigna_angularis",
+    "label": "Vigna Angularis"
+  },
+  {
+    "value": "vigna_radiata",
+    "label": "Vigna Radiata"
+  },
+  {
+    "value": "vigna_unguiculata",
+    "label": "Vigna Unguiculata"
+  },
+  {
+    "value": "vitis_vinifera",
+    "label": "Vitis Vinifera"
+  },
+  {
+    "value": "zea_mays",
+    "label": "Zea Mays"
+  }
+]

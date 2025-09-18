@@ -1,0 +1,180 @@
+<mat-card class="experiment-container">
+   <mat-card-content>
+      <mat-card-title class="m-b-4" style="display: flex; align-items: center; gap: 8px; margin-left: 15px;">
+         Finished Analyses
+         <button mat-icon-button (click)="manualRefresh()" matTooltip="Refresh Data" class="refresh-button">
+            <mat-icon class="refresh-icon">refresh</mat-icon>
+         </button>
+      </mat-card-title>
+      <div class="filters-container">
+         <mat-form-field appearance="outline">
+            <mat-label>Search Experiment Name</mat-label>
+            <input matInput (keyup)="applyFilter($event, 'experimentName')" placeholder="Search by Name">
+         </mat-form-field>
+         <mat-form-field appearance="outline">
+            <mat-label>Search Experiment Type</mat-label>
+            <mat-select [(ngModel)]="searchFilters['experimentType']"
+               (selectionChange)="applyFilter($event.value, 'experimentType')" placeholder="Search by Type">
+               <mat-option value="">All</mat-option>
+               <mat-option value="alignment">Alignment</mat-option>
+               <mat-option value="post-Processing">Post-Processing</mat-option></mat-select>
+         </mat-form-field>
+         <button mat-raised-button color="warn" (click)="resetFilters()">Reset Filters</button>
+      </div>
+      <div class="experiment-grid">
+         <div *ngFor="let experiment of pagedExperiments" class="experiment-card"
+            [ngClass]="[getStatusClass(experiment.status)]">
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+               <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+               <button mat-menu-item (click)="downloadJson(experiment)">
+                  <mat-icon>download</mat-icon> Download parameters
+               </button>
+            </mat-menu>
+            <h3>{{ experiment.metadataFileName }}</h3>
+            <p><strong>Omics Modality:</strong> {{ experiment.omicsModality }}</p>
+            <p><strong>Cellular Resolution:</strong> {{ experiment.cellularResolution }}</p>
+            <p><strong>Type:</strong> {{ experiment.experimentType }}</p>
+            <p><strong>Status:</strong> {{ experiment.status }}</p>
+            <p><strong>createdAt:</strong> {{ experiment.createdAt }}</p>
+            <div class="experiment-actions">
+               <button *ngIf="experiment.experimentType === 'Alignment' && experiment.status !== 'Error'"
+                  (click)="viewHtml(experiment.experimentName)" [disabled]="experiment.status !== 'Done'">View
+                  MultiQC</button>
+               <button *ngIf="experiment.experimentType === 'Alignment' && experiment.status !== 'Error'"
+                  (click)="downloadAllMatrices(experiment.experimentName)"
+                  [disabled]="experiment.status !== 'Done'">Download
+                  Raw Matrix</button>
+               <button *ngIf="experiment.experimentType === 'Post-processing' && experiment.status !== 'Error'"
+                  (click)="openVisualizationN(experiment.experimentName)" [disabled]="experiment.status !== 'Done'">
+                  Visualize
+               </button>
+               <button *ngIf="experiment.experimentType === 'Post-processing' &&  experiment.status !== 'Error'"
+                  (click)="downloadMatrix(experiment.experimentName)" [disabled]="experiment.status !== 'Done'">Download
+                  Processed Matrix</button>
+            </div>
+         </div>
+      </div>
+      <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons
+         aria-label="Pagination for experiments">
+      </mat-paginator>
+   </mat-card-content>
+</mat-card>
+<mat-card class="cardWithShadow overflow-hidden">
+   <mat-card-content>
+      <mat-card-title class="m-b-4" style="display: flex; align-items: center; gap: 8px;">
+         Sample metadata
+         <button mat-icon-button (click)="manualRefresh()" matTooltip="Refresh Data" class="refresh-button">
+            <mat-icon class="refresh-icon">refresh</mat-icon>
+         </button>
+      </mat-card-title>
+      <div *ngIf="loadingOnExport || loadingOnDelete" class="loading">
+         <p>Loading... Please wait.</p>
+      </div>
+   </mat-card-content>
+   <div class="table-responsive">
+      <table mat-table *ngIf="files.length > 0" [dataSource]="filesDataSource" class="w-100">
+         <ng-container matColumnDef="filename">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14">
+               <div style="display: flex; flex-direction: column;">
+                  Dataset Name
+                  <input matInput (keyup)="applyTableFilter($event, 'filename')" placeholder="Search"
+                     style="border: none; border-color: transparent;">
+               </div>
+            </th>
+            <td mat-cell *matCellDef="let element" matTooltip="{{ element.filename }}">{{
+               element.filename.replace('.csv', '') }}</td>
+         </ng-container>
+         <ng-container matColumnDef="cellularResolution">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14">
+               <div style="display: flex; flex-direction: column;">
+                  Cellular Resolution
+                  <mat-select (selectionChange)="applyTableFilter($event.value, 'cellularResolution')"
+                     placeholder="Select">
+                     <mat-option value="">All</mat-option>
+                     <mat-option value="Bulk">Bulk</mat-option>
+                     <mat-option value="Single Cell">Single Cell</mat-option>
+                  </mat-select>
+               </div>
+            </th>
+            <td mat-cell *matCellDef="let element" matTooltip="{{  element.cellularResolution}}">
+               {{ element.cellularResolution }}
+            </td>
+         </ng-container>
+         <ng-container matColumnDef="omicsModality">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14">
+               <div style="display: flex; flex-direction: column;">
+                  Omics Modality
+                  <mat-select (selectionChange)="applyTableFilter($event.value, 'omicsModality')" placeholder="Select">
+                     <mat-option value="">All</mat-option>
+                     <mat-option value="dna">DNA</mat-option>
+                     <mat-option value="rna">RNA</mat-option>
+                     <mat-option value="aa">Protein</mat-option>
+                  </mat-select>
+               </div>
+            </th>
+            <td mat-cell *matCellDef="let element" matTooltip="{{  element.omicsModality}}">
+               {{ element.omicsModality }}
+            </td>
+         </ng-container>
+         <ng-container matColumnDef="organ">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14">
+               <div style="display: flex; flex-direction: column;">
+                  Organ
+                  <input matInput (keyup)="applyTableFilter($event, 'organ')" placeholder="Search"
+                     style="border: none; border-color: transparent;">
+               </div>
+            </th>
+            <td mat-cell *matCellDef="let element" matTooltip="{{ getTooltipText(element.organ) }}">
+               {{ element.organ.length === 1 ? getTooltipText(element.organ) : element.organ.length + ' organ' +
+               (element.organ.length > 1 ? 's' : '') }}
+            </td>
+         </ng-container>
+         <ng-container matColumnDef="disorder">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14">
+               <div style="display: flex; flex-direction: column;">
+                  Disorder
+                  <input matInput (keyup)="applyTableFilter($event, 'disorder')" placeholder="Search"
+                     style="border: none; border-color: transparent;">
+               </div>
+            </th>
+            <td mat-cell *matCellDef="let element" matTooltip="{{ getTooltipText(element.disorder) }}">
+               {{ element.disorder.length === 1 ? getTooltipText(element.disorder) : element.disorder.length + '
+               disorder' +
+               (element.disorder.length > 1 ? 's' : '') }}
+            </td>
+         </ng-container>
+         <ng-container matColumnDef="species">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14">
+               <div style="display: flex; flex-direction: column;">
+                  Species
+                  <mat-select (selectionChange)="applyTableFilter($event.value, 'species')" placeholder="Select">
+                     <mat-option value="">All</mat-option>
+                     <mat-option value="Homo_sapiens">Homo sapiens</mat-option>
+                     <mat-option value="Mus_musculus">Mus musculus</mat-option>
+                  </mat-select>
+               </div>
+            </th>
+            <td mat-cell *matCellDef="let element" matTooltip="{{element.species }}">
+               {{ element.species}}
+            </td>
+         </ng-container>
+         <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14"> Actions</th>
+            <td mat-cell *matCellDef="let element"> <button mat-icon-button
+                  (click)="downloadMetadataFile(element.filename)"
+                  [disabled]="loadingOnExport"><mat-icon>download</mat-icon></button>
+               <button mat-icon-button color="warn" (click)="openDeleteDialog(element)" [disabled]="loadingOnDelete">
+                  <mat-icon>delete</mat-icon>
+               </button>
+            </td>
+         </ng-container>
+         <tr mat-header-row *matHeaderRowDef="displayedDataSetsColumns"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedDataSetsColumns"></tr>
+      </table>
+   </div>
+   <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+   <mat-card-title *ngIf="files.length === 0" class="mat-mdc-card-subtitle"> No Sample metadata available to
+      download.</mat-card-title>
+</mat-card>

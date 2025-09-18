@@ -1,0 +1,36 @@
+@use "../variables" as *; // Import variables and make them globally accessible
+@use "./buttons" as buttons;
+@use "./drawer" as drawer;
+@use "./card" as card;
+@use "./typography" as typography;
+@use "./menu" as menu;
+@use "./checkbox" as checkbox;
+@use "./radio" as radio;
+@use "./form" as form;
+@use "./borderColor" as borderColor;
+@use "./table" as table;
+@use "./rounded" as rounded;
+@use "./list" as list;
+
+.light-theme {
+  @include buttons.styles;
+  @include drawer.styles;
+  @include card.styles;
+  @include typography.styles;
+  @include menu.styles;
+  @include checkbox.styles;
+  @include radio.styles;
+
+  .topbar {
+    background-color: $toolbar;
+  }
+}
+
+body {
+  @include form.styles;
+}
+
+@include borderColor.styles;
+@include table.styles;
+@include rounded.styles;
+@include list.styles;

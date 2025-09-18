@@ -1,0 +1,6 @@
+@use "../variables" as *;
+// theme
+@mixin styles {
+.mat-drawer-side {
+  border-right: 1px solid $borderColor;
+}}

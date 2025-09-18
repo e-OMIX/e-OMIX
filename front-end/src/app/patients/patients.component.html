@@ -1,0 +1,49 @@
+<mat-card class="cardWithShadow overflow-hidden">
+  <mat-card-content>
+    <mat-card-title class="m-b-4">Patients</mat-card-title>
+    <mat-card-title class="m-b-4">
+      <div class="file-dropdown">
+        <p>Please select a metadata file:</p>
+        <mat-select [(value)]="selectedMetadataFileDetails" placeholder="Select a file"
+          (selectionChange)="getPatientDetails()" [disabled]="loadingOnPatientDetails">
+          <mat-option *ngFor="let file of filesDataSource.data" [value]="file.filename">
+            {{ file.filename }}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="loadingOnPatientDetails" class="loading">
+          <p>Loading the samples... Please wait.</p>
+        </div>
+      </div>
+    </mat-card-title>
+    <mat-card-title *ngIf="entries&& entries.length > 0" class="mat-mdc-card-subtitle">Total patients
+      number: {{entries.length}}</mat-card-title>
+    <mat-card-title *ngIf=" selectedMetadataFileDetails && entries  && entries.length === 0 "
+      class="mat-mdc-card-subtitle">There is no patients in this metadata file</mat-card-title>
+  </mat-card-content>
+  <div *ngIf="entries && entries.length >= 1">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="w-100">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Patient ID </th>
+        <td mat-cell *matCellDef="let element" matTooltip="{{ element.resource.identifier[1].id}}">
+          {{element.resource.identifier[1].id}}</td>
+      </ng-container>
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef> Age</th>
+        <td mat-cell *matCellDef="let element" matTooltip="{{ getPatientAge(element.resource)}}">
+          {{ getPatientAge(element.resource)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> Gender</th>
+        <td mat-cell *matCellDef="let element" matTooltip="{{ element.resource.gender}}">
+          {{element.resource.gender}}</td>
+      </ng-container>
+      <ng-container matColumnDef="species">
+        <th mat-header-cell *matHeaderCellDef> Species </th>
+        <td mat-cell *matCellDef="let element" matTooltip="{{getPatientSpecies(element.resource)}}">
+          {{getPatientSpecies(element.resource)}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedPatientColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedPatientColumns;"></tr>
+    </table>
+  </div>
+</mat-card>

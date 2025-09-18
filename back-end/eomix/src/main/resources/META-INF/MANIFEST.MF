@@ -1,0 +1,108 @@
+Manifest-Version: 1.0
+Main-Class: com.example.eomix.EomixApplication
+Class-Path: flyway-core-11.1.0.jar swagger-models-jakarta-2.2.15.jar jac
+ kson-datatype-jsr310-2.17.2.jar tomcat-embed-core-10.1.28.jar jakarta.x
+ ml.bind-api-4.0.2.jar commons-io-2.11.0.jar collection-0.7.jar error_pr
+ one_annotations-2.3.4.jar listenablefuture-9999.0-empty-to-avoid-confli
+ ct-with-guava.jar attoparser-2.0.7.RELEASE.jar hibernate-search-backend
+ -elasticsearch-7.0.0.Final.jar hapi-fhir-structures-r4b-7.4.3.jar jaxb-
+ core-4.0.5.jar core-module-6.6.1.jar slf4j-api-2.0.16.jar checksums-2.2
+ 1.1.jar logback-classic-1.5.7.jar postgresql-42.6.0.jar hibernate-valid
+ ator-8.0.1.Final.jar springdoc-openapi-starter-webmvc-ui-2.2.0.jar spri
+ ng-data-jpa-3.3.3.jar spring-boot-starter-json-3.3.3.jar tomcat-embed-e
+ l-10.1.28.jar quartz-2.3.2.jar httpcore5-h2-5.2.5.jar icu4j-72.1.jar to
+ mcat-embed-websocket-10.1.28.jar okio-3.6.0.jar swagger-ui-5.2.0.jar sp
+ ring-websocket-6.1.12.jar jackson-coreutils-1.6.jar elasticsearch-rest-
+ client-sniffer-8.13.4.jar minio-8.5.7.jar checker-qual-3.31.0.jar graph
+ ql-java-22.1.jar hppc-0.9.1.jar hapi-fhir-server-mdm-7.4.3.jar commons-
+ cli-1.5.0.jar jackson-dataformat-yaml-2.17.2.jar jakarta.transaction-ap
+ i-2.0.1.jar metrics-spi-2.21.1.jar logback-core-1.5.7.jar spring-tx-6.1
+ .12.jar hapi-fhir-structures-dstu2-7.4.3.jar woodstox-core-6.4.0.jar ht
+ tpcore-4.4.16.jar hapi-fhir-validation-resources-r4-7.4.3.jar json-path
+ -2.9.0.jar snappy-java-1.1.10.5.jar jackson-annotations-2.17.2.jar comm
+ ons-compress-1.24.0.jar hapi-fhir-storage-batch2-7.4.3.jar httpclient5-
+ 5.2.1.jar jakarta.json-2.0.1.jar accessors-smart-2.5.1.jar elasticsearc
+ h-rest-client-8.13.4.jar org.ektorp-1.5.0.jar org.hl7.fhir.r5-6.3.11.ja
+ r http-client-spi-2.21.1.jar javassist-3.22.0-GA.jar spring-data-envers
+ -3.3.3.jar jul-to-slf4j-2.0.16.jar jackson-module-parameter-names-2.17.
+ 2.jar httpasyncclient-4.1.5.jar identity-spi-2.21.1.jar spring-jdbc-6.1
+ .12.jar jetty-server-11.0.12.jar spring-webmvc-6.1.12.jar hibernate-cor
+ e-6.4.1.Final.jar ojdbc11-21.9.0.0.jar hapi-fhir-jpaserver-base-7.4.3.j
+ ar annotations-2.21.1.jar jakarta.annotation-api-2.1.1.jar byte-buddy-1
+ .14.19.jar RoaringBitmap-0.9.45.jar thymeleaf-spring6-3.1.2.RELEASE.jar
+  endpoints-spi-2.21.1.jar ognl-3.3.4.jar snakeyaml-2.2.jar spring-conte
+ xt-support-6.1.12.jar jandex-3.1.2.jar hapi-fhir-base-7.4.3.jar lucene-
+ analysis-phonetic-9.8.0.jar spring-context-6.1.12.jar spring-boot-start
+ er-tomcat-3.3.3.jar xml-patch-0.3.1.jar kotlin-stdlib-jdk7-1.9.25.jar s
+ pring-boot-autoconfigure-3.3.3.jar flyway-database-postgresql-11.1.0.ja
+ r btf-1.2.jar xpp3-1.1.6.jar hapi-fhir-structures-hl7org-dstu2-7.4.3.ja
+ r hapi-fhir-converter-7.4.3.jar opentelemetry-context-1.37.0.jar jboss-
+ logging-3.5.3.Final.jar lucene-join-9.8.0.jar hibernate-search-backend-
+ lucene-7.0.0.Final.jar jakarta.el-4.0.2.jar Saxon-HE-9.8.0-15.jar hiber
+ nate-search-backend-elasticsearch-aws-7.0.0.Final.jar jetbrains-runtime
+ -annotations-1.0.0.jar hapi-fhir-caching-api-7.4.3.jar failureaccess-1.
+ 0.1.jar checksums-spi-2.21.1.jar hibernate-search-engine-7.0.0.Final.ja
+ r spring-beans-6.1.12.jar hapi-fhir-client-7.4.3.jar jakarta-regexp-1.4
+ .jar plantuml-mit-1.2023.9.jar shims-0.9.45.jar hapi-fhir-sql-migrate-7
+ .4.3.jar unbescape-1.1.6.RELEASE.jar micrometer-commons-1.13.3.jar hapi
+ -fhir-structures-r5-7.4.3.jar spring-boot-devtools-3.3.3.jar lucene-fac
+ et-9.8.0.jar swagger-core-jakarta-2.2.15.jar org.hl7.fhir.dstu3-6.3.11.
+ jar lucene-queries-9.8.0.jar regions-2.21.1.jar httpclient-cache-4.3.ja
+ r hibernate-search-mapper-orm-7.0.0.Final.jar simple-xml-safe-2.7.1.jar
+  profiles-2.21.1.jar gson-2.10.1.jar parsson-1.0.5.jar jakarta.persiste
+ nce-api-3.1.0.jar org.hl7.fhir.r4b-6.3.11.jar caffeine-3.1.8.jar jetty-
+ http-12.0.12.jar springdoc-openapi-starter-webmvc-api-2.2.0.jar hapi-fh
+ ir-structures-dstu3-7.4.3.jar hibernate-commons-annotations-6.0.6.Final
+ .jar json-utils-2.21.1.jar hapi-fhir-validation-resources-dstu2-7.4.3.j
+ ar org.hl7.fhir.validation-6.3.11.jar jcl-over-slf4j-2.0.16.jar spring-
+ boot-starter-web-3.3.3.jar jakarta.activation-api-2.1.3.jar asm-9.6.jar
+  org.hl7.fhir.dstu2016may-6.3.11.jar jetty-jakarta-servlet-api-5.0.2.ja
+ r org.hl7.fhir.utilities-6.3.11.jar spring-data-commons-3.3.3.jar jsonl
+ d-java-0.13.4.jar simple-java-mail-6.6.1.jar lombok-1.18.34.jar reactiv
+ e-streams-1.0.4.jar antlr4-runtime-4.13.0.jar ucum-1.0.8.jar jakarta.ma
+ il-1.6.5.jar msg-simple-1.1.jar commons-text-1.10.0.jar annotations-23.
+ 0.0.jar jetty-util-11.0.12.jar spring-core-6.1.12.jar bcprov-jdk18on-1.
+ 76.jar jetty-io-12.0.12.jar spring-boot-starter-logging-3.3.3.jar httpc
+ lient-4.3.jar commons-codec-1.16.1.jar auth-2.21.1.jar third-party-jack
+ son-core-2.21.1.jar spring-aop-6.1.12.jar java-dataloader-3.3.0.jar ist
+ ack-commons-runtime-4.1.2.jar json-patch-1.15.jar json-smart-2.5.1.jar 
+ commons-dbcp2-2.12.0.jar lucene-core-9.8.0.jar commons-collections4-4.4
+ .jar spring-expression-6.1.12.jar log4j-api-2.23.1.jar opentelemetry-ap
+ i-1.37.0.jar guava-30.1-jre.jar spring-web-6.1.12.jar hapi-fhir-jpa-7.4
+ .3.jar springdoc-openapi-starter-common-2.2.0.jar nimbus-jose-jwt-9.37.
+ 3.jar javax.servlet-api-4.0.1.jar jena-base-4.9.0.jar jackson-core-2.17
+ .2.jar http-auth-2.21.1.jar hibernate-envers-6.5.2.Final.jar classmate-
+ 1.7.0.jar jsr305-3.0.2.jar thymeleaf-3.1.2.RELEASE.jar okio-jvm-3.6.0.j
+ ar kotlin-stdlib-common-1.9.25.jar org.hl7.fhir.convertors-6.3.11.jar h
+ ttp-auth-spi-2.21.1.jar kotlin-stdlib-1.9.25.jar spring-retry-2.0.8.jar
+  hapi-fhir-validation-resources-dstu3-7.4.3.jar datasource-proxy-1.10.j
+ ar jena-core-4.9.0.jar angus-activation-2.0.2.jar protobuf-java-3.23.3.
+ jar http-auth-aws-2.21.1.jar hapi-fhir-jpaserver-searchparam-7.4.3.jar 
+ spring-boot-3.3.3.jar utils-2.21.1.jar jaxb-runtime-4.0.5.jar httpcore5
+ -5.2.5.jar hapi-fhir-validation-7.4.3.jar hapi-fhir-server-7.4.3.jar sw
+ agger-annotations-jakarta-2.2.15.jar annotations-1.3.2.jar jetty-servle
+ t-11.0.12.jar spring-orm-6.1.12.jar hapi-fhir-validation-resources-r5-7
+ .4.3.jar jakarta.validation-api-3.0.2.jar commons-csv-1.9.0.jar jakarta
+ .el-api-4.0.0.jar sqlbuilder-3.0.2.jar owasp-java-html-sanitizer-202110
+ 18.2.jar txw2-4.0.5.jar commons-lang3-3.14.0.jar spring-messaging-6.1.1
+ 2.jar sqlite-jdbc-3.45.3.0.jar jackson-dataformat-toml-2.17.2.jar elast
+ icsearch-java-8.13.4.jar stax2-api-4.2.1.jar hapi-fhir-storage-batch2-j
+ obs-7.4.3.jar lucene-queryparser-9.8.0.jar jetty-security-12.0.12.jar h
+ api-fhir-caching-caffeine-7.4.3.jar emailaddress-rfc2822-2.2.0.jar j2ob
+ jc-annotations-1.3.jar okhttp-4.12.0.jar libthrift-0.18.1.jar jetty-web
+ app-11.0.12.jar apm-agent-api-1.44.0.jar micrometer-observation-1.13.3.
+ jar hapi-fhir-structures-r4-7.4.3.jar jetty-xml-12.0.12.jar httpcore-ni
+ o-4.4.16.jar jscience-4.3.1.jar jcip-annotations-1.0-1.jar lucene-memor
+ y-9.8.0.jar spring-jcl-6.1.12.jar spring-boot-starter-3.3.3.jar hapi-fh
+ ir-validation-resources-r4b-7.4.3.jar jena-iri-4.9.0.jar jackson-databi
+ nd-2.17.2.jar sdk-core-2.21.1.jar jena-arq-4.9.0.jar opentelemetry-inst
+ rumentation-annotations-2.4.0.jar jackson-datatype-jdk8-2.17.2.jar hapi
+ -fhir-jpaserver-model-7.4.3.jar h2-2.2.224.jar lucene-highlighter-9.8.0
+ .jar eventstream-1.0.1.jar log4j-to-slf4j-2.23.1.jar kotlin-stdlib-jdk8
+ -1.9.25.jar java-string-similarity-1.2.1.jar org.hl7.fhir.dstu2-6.3.11.
+ jar hapi-fhir-jpaserver-subscription-7.4.3.jar hapi-fhir-storage-7.4.3.
+ jar hibernate-search-mapper-pojo-base-7.0.0.Final.jar jakarta.inject-ap
+ i-2.0.1.jar commons-pool2-2.12.0.jar org.hl7.fhir.r4-6.3.11.jar hiberna
+ te-search-util-common-7.0.0.Final.jar lucene-analysis-common-9.8.0.jar 
+ titanium-json-ld-1.3.2.jar
+

@@ -1,0 +1,59 @@
+# RStudio project files
+.Rproj.user
+*.Rproj
+*.Rhistory
+.RData
+
+# macOS Finder files
+.DS_Store
+
+# Archives folder (top-level only)
+archives/
+
+#java
+/back-end/eomix/target
+/back-end/eomix/src/main/resouces/scRNA-seq/pos-processing/post-processing_app_env_var.R
+
+
+#Front end
+# Compiled output
+/front-end/dist
+/front-end/tmp
+/out-tsc
+/bazel-out
+/src/assets/annotation
+/src/assets/genome
+# Node
+/front-end/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db

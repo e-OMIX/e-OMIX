@@ -1,0 +1,55 @@
+<mat-card class="cardWithShadow overflow-hidden">
+  <mat-card-content>
+    <mat-card-title class="m-b-4">Samples</mat-card-title>
+    <mat-card-title class="m-b-4">
+      <div class="file-dropdown">
+        <p>Please select a metadata file:</p>
+        <mat-select [(value)]="selectedMetadataFileDetails" placeholder="Select a file"
+          (selectionChange)="getSampleIds()" [disabled]="loadingOnSampleIds">
+          <mat-option *ngFor="let file of filesDataSource.data" [value]="file.filename">
+            {{ file.filename }}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="loadingOnSampleIds" class="loading">
+          <p>Loading the samples... Please wait.</p>
+        </div>
+      </div>
+
+    </mat-card-title>
+    <mat-card-title *ngIf="selectedMetadataFileDetails && entries  && entries.length === 0 "
+      class="mat-mdc-card-subtitle">There is no sample in this metadata file</mat-card-title>
+    <mat-card-title *ngIf="entries  && entries.length > 0" class="mat-mdc-card-subtitle">Total Samples
+      number: {{entries.length}}</mat-card-title>
+  </mat-card-content>
+  <div *ngIf="entries && entries.length > 0  ">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="w-100">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Sample ID </th>
+        <td mat-cell *matCellDef="let element" matTooltip="{{ element.resource.identifier[0].id}}">
+          {{element.resource.identifier[0].id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="samplingMethod">
+        <th mat-header-cell *matHeaderCellDef> Assay </th>
+        <td mat-cell *matCellDef="let element" matTooltip="{{ element.resource.collection.method.coding[0]?.display}}">
+          {{element.resource.collection.method.coding[0]?.display}} </td>
+      </ng-container>
+      <ng-container matColumnDef="condition">
+        <th mat-header-cell *matHeaderCellDef> Condition </th>
+        <td mat-cell *matCellDef="let element" matTooltip="{{ element.resource.condition[0]?.coding[0]?.display}}">
+          {{element.resource.condition[0]?.coding[0]?.display}} </td>
+      </ng-container>
+      <ng-container matColumnDef="patient">
+        <th mat-header-cell *matHeaderCellDef> Subject ID </th>
+        <td mat-cell *matCellDef="let element" matTooltip="{{ element.resource.subject.reference}}">
+          {{element.resource.subject.reference}} </td>
+      </ng-container>
+      <ng-container matColumnDef="batch">
+        <th mat-header-cell *matHeaderCellDef> Batch </th>
+        <td mat-cell *matCellDef="let element" matTooltip="{{  getOfficialId(element.resource.contained[0])}}">{{
+          getOfficialId(element.resource.contained[0])}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedSpecimenColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedSpecimenColumns;"></tr>
+    </table>
+  </div>
+</mat-card>

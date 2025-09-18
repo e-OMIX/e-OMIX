@@ -1,0 +1,123 @@
+<mat-card class="cardWithShadow overflow-hidden">
+  <mat-card-content>
+    <mat-card-title class="m-b-4">FHIR Data Tree</mat-card-title>
+    <mat-card-title class="m-b-4">
+      <div class="file-dropdown">
+        <div class="file-selector-container">
+          <span class="file-label">Please select a metadata file:</span>
+          <mat-select [(value)]="selectedMetadataFileDetails" placeholder="Select a file"
+            (selectionChange)="getSampleIds()" [disabled]="loadingOnSampleIds" class="file-select">
+            <mat-option *ngFor="let file of filesDataSource.data" [value]="file.filename">
+              {{ file.filename }}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div *ngIf="loadingOnSampleIds" class="loading">
+          <mat-spinner diameter="20"></mat-spinner>
+          <p>Loading the samples... Please wait.</p>
+        </div>
+      </div>
+    </mat-card-title>
+    <mat-card-title *ngIf="selectedMetadataFileDetails && specimenEntries && specimenEntries.length === 0"
+      class="mat-mdc-card-subtitle">
+      There is no sample in this metadata file
+    </mat-card-title>
+    <mat-card-title *ngIf="specimenEntries && specimenEntries.length > 0" class="mat-mdc-card-subtitle">
+      Total Batches: {{batchCount}} | Total Samples: {{specimenEntries.length}}
+    </mat-card-title>
+  </mat-card-content>
+  <!-- Tree View Section -->
+  <div *ngIf="treeData && treeData.length > 0" class="tree-container">
+    <mat-tree [dataSource]="treeDataSource" [treeControl]="treeControl" class="fhir-tree">
+      <!-- Molecular Sequence Node (Level 0) -->
+      <mat-nested-tree-node *matTreeNodeDef="let node; when: isMolecularSequenceNode">
+        <div class="mat-tree-node molecular-sequence-node">
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name" class="toggle-button">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          <div class="node-content molecular-sequence-content">
+            <span class="node-title">Molecular Sequence: {{node.name}}</span>
+            <span class="node-subtitle">Type: {{node.type}} | Resolution: {{node.cellularResolution}}</span>
+            <div class="sequence-details">
+              <span class="badge badge-primary">{{node.batchCount}} {{node.batchCount === 1 ? 'Batch' :
+                'Batches'}}</span>
+              <span class="accession-badge">Metadata Sample: {{node.accessionId}}</span>
+            </div>
+          </div>
+        </div>
+        <div [class.hidden]="!treeControl.isExpanded(node)" class="node-children">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </div>
+      </mat-nested-tree-node>
+      <!-- Batch Node (Level 1) -->
+      <mat-nested-tree-node *matTreeNodeDef="let node; when: isBatchNode">
+        <div class="mat-tree-node batch-node">
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name" class="toggle-button">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          <div class="node-content batch-content">
+            <span class="node-title">Batch: {{node.name}}</span>
+            <span class="node-subtitle">ID: {{node.name}}</span>
+            <div class="batch-details">
+              <span class="badge badge-secondary">{{node.specimenCount}} {{node.specimenCount === 1 ? 'Specimen' :
+                'Specimens'}}</span>
+            </div>
+          </div>
+        </div>
+        <div [class.hidden]="!treeControl.isExpanded(node)" class="node-children">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </div>
+      </mat-nested-tree-node>
+      <!-- Specimen Node (Level 2) - Now properly nested -->
+      <mat-nested-tree-node *matTreeNodeDef="let node; when: isSpecimenNode">
+        <div class="mat-tree-node specimen-node">
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle patient details for ' + node.name"
+            class="toggle-button">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          <div class="node-content specimen-content">
+            <span class="node-title">Specimen: {{node.name}}</span>
+            <span class="node-subtitle">
+              Assay: {{node.assay}} | Organ: {{node.organ}} | Condition: {{node.condition}}
+            </span>
+          </div>
+        </div>
+        <!-- Patient Details Container (Level 3) -->
+        <div [class.hidden]="!treeControl.isExpanded(node)" class="node-children patient-children">
+          <!-- Patient Details -->
+          <div *ngIf="node.patient" class="patient-info detail-node patient-detail ">
+            <span class="patient-label">Patient:</span>
+            <span class="patient-details">
+              ID: {{node.patient.id}} |
+              Gender: {{node.patient.gender}} |
+              <span *ngIf="node.patient.age">Age: {{node.patient.age}} |</span>
+              <span *ngIf="node.patient.species">Species: {{node.patient.species}}</span>
+            </span>
+          </div>
+          <!-- No Patient Message -->
+          <div *ngIf="!node.patient" class="detail-node no-patient-data">
+            <button mat-icon-button disabled class="toggle-button">
+              <mat-icon class="mat-icon-rtl-mirror">person_off</mat-icon>
+            </button>
+            <div class="node-content">
+              <span class="node-subtitle">(No Patient Linked)</span>
+            </div>
+          </div>
+        </div>
+      </mat-nested-tree-node>
+
+    </mat-tree>
+  </div>
+  <!-- Empty State -->
+  <div *ngIf="selectedMetadataFileDetails && (!treeData || treeData.length === 0) && !loadingOnSampleIds"
+    class="empty-state">
+    <mat-icon class="empty-icon">science</mat-icon>
+    <p>No molecular sequence data found for the selected file.</p>
+  </div>
+</mat-card>

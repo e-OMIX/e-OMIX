@@ -1,0 +1,1070 @@
+[
+  {
+    "value": "acanthochromis_polyacanthus",
+    "label": "Acanthochromis Polyacanthus"
+  },
+  {
+    "value": "accipiter_nisus",
+    "label": "Accipiter Nisus"
+  },
+  {
+    "value": "ailuropoda_melanoleuca",
+    "label": "Ailuropoda Melanoleuca"
+  },
+  {
+    "value": "amazona_collaria",
+    "label": "Amazona Collaria"
+  },
+  {
+    "value": "amphilophus_citrinellus",
+    "label": "Amphilophus Citrinellus"
+  },
+  {
+    "value": "amphiprion_ocellaris",
+    "label": "Amphiprion Ocellaris"
+  },
+  {
+    "value": "amphiprion_percula",
+    "label": "Amphiprion Percula"
+  },
+  {
+    "value": "anabas_testudineus",
+    "label": "Anabas Testudineus"
+  },
+  {
+    "value": "anas_platyrhynchos",
+    "label": "Anas Platyrhynchos"
+  },
+  {
+    "value": "anas_zonorhyncha",
+    "label": "Anas Zonorhyncha"
+  },
+  {
+    "value": "anolis_carolinensis",
+    "label": "Anolis Carolinensis"
+  },
+  {
+    "value": "anser_brachyrhynchus",
+    "label": "Anser Brachyrhynchus"
+  },
+  {
+    "value": "anser_cygnoides",
+    "label": "Anser Cygnoides"
+  },
+  {
+    "value": "aotus_nancymaae",
+    "label": "Aotus Nancymaae"
+  },
+  {
+    "value": "apteryx_haastii",
+    "label": "Apteryx Haastii"
+  },
+  {
+    "value": "apteryx_owenii",
+    "label": "Apteryx Owenii"
+  },
+  {
+    "value": "apteryx_rowi",
+    "label": "Apteryx Rowi"
+  },
+  {
+    "value": "aquila_chrysaetos",
+    "label": "Aquila Chrysaetos"
+  },
+  {
+    "value": "astatotilapia_calliptera",
+    "label": "Astatotilapia Calliptera"
+  },
+  {
+    "value": "astyanax_mexicanus",
+    "label": "Astyanax Mexicanus"
+  },
+  {
+    "value": "athene_cunicularia",
+    "label": "Athene Cunicularia"
+  },
+  {
+    "value": "balaenoptera_musculus",
+    "label": "Balaenoptera Musculus"
+  },
+  {
+    "value": "betta_splendens",
+    "label": "Betta Splendens"
+  },
+  {
+    "value": "bison_bison",
+    "label": "Bison Bison"
+  },
+  {
+    "value": "bos_grunniens",
+    "label": "Bos Grunniens"
+  },
+  {
+    "value": "bos_indicus",
+    "label": "Bos Indicus"
+  },
+  {
+    "value": "bos_mutus",
+    "label": "Bos Mutus"
+  },
+  {
+    "value": "bos_taurus",
+    "label": "Bos Taurus"
+  },
+  {
+    "value": "bubo_bubo",
+    "label": "Bubo Bubo"
+  },
+  {
+    "value": "buteo_japonicus",
+    "label": "Buteo Japonicus"
+  },
+  {
+    "value": "caenorhabditis_elegans",
+    "label": "Caenorhabditis Elegans"
+  },
+  {
+    "value": "cairina_moschata",
+    "label": "Cairina Moschata"
+  },
+  {
+    "value": "calidris_pugnax",
+    "label": "Calidris Pugnax"
+  },
+  {
+    "value": "calidris_pygmaea",
+    "label": "Calidris Pygmaea"
+  },
+  {
+    "value": "callithrix_jacchus",
+    "label": "Callithrix Jacchus"
+  },
+  {
+    "value": "callorhinchus_milii",
+    "label": "Callorhinchus Milii"
+  },
+  {
+    "value": "camarhynchus_parvulus",
+    "label": "Camarhynchus Parvulus"
+  },
+  {
+    "value": "camelus_dromedarius",
+    "label": "Camelus Dromedarius"
+  },
+  {
+    "value": "canis_lupus",
+    "label": "Canis Lupus"
+  },
+  {
+    "value": "capra_hircus",
+    "label": "Capra Hircus"
+  },
+  {
+    "value": "carassius_auratus",
+    "label": "Carassius Auratus"
+  },
+  {
+    "value": "carlito_syrichta",
+    "label": "Carlito Syrichta"
+  },
+  {
+    "value": "castor_canadensis",
+    "label": "Castor Canadensis"
+  },
+  {
+    "value": "catagonus_wagneri",
+    "label": "Catagonus Wagneri"
+  },
+  {
+    "value": "catharus_ustulatus",
+    "label": "Catharus Ustulatus"
+  },
+  {
+    "value": "cavia_aperea",
+    "label": "Cavia Aperea"
+  },
+  {
+    "value": "cavia_porcellus",
+    "label": "Cavia Porcellus"
+  },
+  {
+    "value": "cebus_imitator",
+    "label": "Cebus Imitator"
+  },
+  {
+    "value": "cercocebus_atys",
+    "label": "Cercocebus Atys"
+  },
+  {
+    "value": "cervus_hanglu",
+    "label": "Cervus Hanglu"
+  },
+  {
+    "value": "chelonoidis_abingdonii",
+    "label": "Chelonoidis Abingdonii"
+  },
+  {
+    "value": "chelydra_serpentina",
+    "label": "Chelydra Serpentina"
+  },
+  {
+    "value": "chinchilla_lanigera",
+    "label": "Chinchilla Lanigera"
+  },
+  {
+    "value": "chlorocebus_sabaeus",
+    "label": "Chlorocebus Sabaeus"
+  },
+  {
+    "value": "choloepus_hoffmanni",
+    "label": "Choloepus Hoffmanni"
+  },
+  {
+    "value": "chrysemys_picta",
+    "label": "Chrysemys Picta"
+  },
+  {
+    "value": "chrysolophus_pictus",
+    "label": "Chrysolophus Pictus"
+  },
+  {
+    "value": "ciona_intestinalis",
+    "label": "Ciona Intestinalis"
+  },
+  {
+    "value": "ciona_savignyi",
+    "label": "Ciona Savignyi"
+  },
+  {
+    "value": "clupea_harengus",
+    "label": "Clupea Harengus"
+  },
+  {
+    "value": "colobus_angolensis",
+    "label": "Colobus Angolensis"
+  },
+  {
+    "value": "corvus_moneduloides",
+    "label": "Corvus Moneduloides"
+  },
+  {
+    "value": "cottoperca_gobio",
+    "label": "Cottoperca Gobio"
+  },
+  {
+    "value": "coturnix_japonica",
+    "label": "Coturnix Japonica"
+  },
+  {
+    "value": "cricetulus_griseus",
+    "label": "Cricetulus Griseus"
+  },
+  {
+    "value": "crocodylus_porosus",
+    "label": "Crocodylus Porosus"
+  },
+  {
+    "value": "cyanistes_caeruleus",
+    "label": "Cyanistes Caeruleus"
+  },
+  {
+    "value": "cyclopterus_lumpus",
+    "label": "Cyclopterus Lumpus"
+  },
+  {
+    "value": "cynoglossus_semilaevis",
+    "label": "Cynoglossus Semilaevis"
+  },
+  {
+    "value": "cyprinodon_variegatus",
+    "label": "Cyprinodon Variegatus"
+  },
+  {
+    "value": "cyprinus_carpio",
+    "label": "Cyprinus Carpio"
+  },
+  {
+    "value": "danio_rerio",
+    "label": "Danio Rerio"
+  },
+  {
+    "value": "dasypus_novemcinctus",
+    "label": "Dasypus Novemcinctus"
+  },
+  {
+    "value": "delphinapterus_leucas",
+    "label": "Delphinapterus Leucas"
+  },
+  {
+    "value": "denticeps_clupeoides",
+    "label": "Denticeps Clupeoides"
+  },
+  {
+    "value": "dicentrarchus_labrax",
+    "label": "Dicentrarchus Labrax"
+  },
+  {
+    "value": "dipodomys_ordii",
+    "label": "Dipodomys Ordii"
+  },
+  {
+    "value": "dromaius_novaehollandiae",
+    "label": "Dromaius Novaehollandiae"
+  },
+  {
+    "value": "drosophila_melanogaster",
+    "label": "Drosophila Melanogaster"
+  },
+  {
+    "value": "echeneis_naucrates",
+    "label": "Echeneis Naucrates"
+  },
+  {
+    "value": "echinops_telfairi",
+    "label": "Echinops Telfairi"
+  },
+  {
+    "value": "electrophorus_electricus",
+    "label": "Electrophorus Electricus"
+  },
+  {
+    "value": "eptatretus_burgeri",
+    "label": "Eptatretus Burgeri"
+  },
+  {
+    "value": "equus_asinus",
+    "label": "Equus Asinus"
+  },
+  {
+    "value": "equus_caballus",
+    "label": "Equus Caballus"
+  },
+  {
+    "value": "erinaceus_europaeus",
+    "label": "Erinaceus Europaeus"
+  },
+  {
+    "value": "erpetoichthys_calabaricus",
+    "label": "Erpetoichthys Calabaricus"
+  },
+  {
+    "value": "erythrura_gouldiae",
+    "label": "Erythrura Gouldiae"
+  },
+  {
+    "value": "esox_lucius",
+    "label": "Esox Lucius"
+  },
+  {
+    "value": "falco_tinnunculus",
+    "label": "Falco Tinnunculus"
+  },
+  {
+    "value": "felis_catus",
+    "label": "Felis Catus"
+  },
+  {
+    "value": "ficedula_albicollis",
+    "label": "Ficedula Albicollis"
+  },
+  {
+    "value": "fukomys_damarensis",
+    "label": "Fukomys Damarensis"
+  },
+  {
+    "value": "fundulus_heteroclitus",
+    "label": "Fundulus Heteroclitus"
+  },
+  {
+    "value": "gadus_morhua",
+    "label": "Gadus Morhua"
+  },
+  {
+    "value": "gallus_gallus",
+    "label": "Gallus Gallus"
+  },
+  {
+    "value": "gambusia_affinis",
+    "label": "Gambusia Affinis"
+  },
+  {
+    "value": "gasterosteus_aculeatus",
+    "label": "Gasterosteus Aculeatus"
+  },
+  {
+    "value": "geospiza_fortis",
+    "label": "Geospiza Fortis"
+  },
+  {
+    "value": "gopherus_agassizii",
+    "label": "Gopherus Agassizii"
+  },
+  {
+    "value": "gopherus_evgoodei",
+    "label": "Gopherus Evgoodei"
+  },
+  {
+    "value": "gorilla_gorilla",
+    "label": "Gorilla Gorilla"
+  },
+  {
+    "value": "gouania_willdenowi",
+    "label": "Gouania Willdenowi"
+  },
+  {
+    "value": "haplochromis_burtoni",
+    "label": "Haplochromis Burtoni"
+  },
+  {
+    "value": "heterocephalus_glaber",
+    "label": "Heterocephalus Glaber"
+  },
+  {
+    "value": "hippocampus_comes",
+    "label": "Hippocampus Comes"
+  },
+  {
+    "value": "homo_sapiens",
+    "label": "Homo Sapiens"
+  },
+  {
+    "value": "hucho_hucho",
+    "label": "Hucho Hucho"
+  },
+  {
+    "value": "ictalurus_punctatus",
+    "label": "Ictalurus Punctatus"
+  },
+  {
+    "value": "ictidomys_tridecemlineatus",
+    "label": "Ictidomys Tridecemlineatus"
+  },
+  {
+    "value": "jaculus_jaculus",
+    "label": "Jaculus Jaculus"
+  },
+  {
+    "value": "junco_hyemalis",
+    "label": "Junco Hyemalis"
+  },
+  {
+    "value": "kryptolebias_marmoratus",
+    "label": "Kryptolebias Marmoratus"
+  },
+  {
+    "value": "labrus_bergylta",
+    "label": "Labrus Bergylta"
+  },
+  {
+    "value": "larimichthys_crocea",
+    "label": "Larimichthys Crocea"
+  },
+  {
+    "value": "lates_calcarifer",
+    "label": "Lates Calcarifer"
+  },
+  {
+    "value": "laticauda_laticaudata",
+    "label": "Laticauda Laticaudata"
+  },
+  {
+    "value": "latimeria_chalumnae",
+    "label": "Latimeria Chalumnae"
+  },
+  {
+    "value": "lepidothrix_coronata",
+    "label": "Lepidothrix Coronata"
+  },
+  {
+    "value": "lepisosteus_oculatus",
+    "label": "Lepisosteus Oculatus"
+  },
+  {
+    "value": "leptobrachium_leishanense",
+    "label": "Leptobrachium Leishanense"
+  },
+  {
+    "value": "lonchura_striata",
+    "label": "Lonchura Striata"
+  },
+  {
+    "value": "loxodonta_africana",
+    "label": "Loxodonta Africana"
+  },
+  {
+    "value": "lynx_canadensis",
+    "label": "Lynx Canadensis"
+  },
+  {
+    "value": "macaca_fascicularis",
+    "label": "Macaca Fascicularis"
+  },
+  {
+    "value": "macaca_mulatta",
+    "label": "Macaca Mulatta"
+  },
+  {
+    "value": "macaca_nemestrina",
+    "label": "Macaca Nemestrina"
+  },
+  {
+    "value": "malurus_cyaneus",
+    "label": "Malurus Cyaneus"
+  },
+  {
+    "value": "manacus_vitellinus",
+    "label": "Manacus Vitellinus"
+  },
+  {
+    "value": "mandrillus_leucophaeus",
+    "label": "Mandrillus Leucophaeus"
+  },
+  {
+    "value": "marmota_marmota",
+    "label": "Marmota Marmota"
+  },
+  {
+    "value": "mastacembelus_armatus",
+    "label": "Mastacembelus Armatus"
+  },
+  {
+    "value": "maylandia_zebra",
+    "label": "Maylandia Zebra"
+  },
+  {
+    "value": "meleagris_gallopavo",
+    "label": "Meleagris Gallopavo"
+  },
+  {
+    "value": "melopsittacus_undulatus",
+    "label": "Melopsittacus Undulatus"
+  },
+  {
+    "value": "meriones_unguiculatus",
+    "label": "Meriones Unguiculatus"
+  },
+  {
+    "value": "mesocricetus_auratus",
+    "label": "Mesocricetus Auratus"
+  },
+  {
+    "value": "microcebus_murinus",
+    "label": "Microcebus Murinus"
+  },
+  {
+    "value": "microtus_ochrogaster",
+    "label": "Microtus Ochrogaster"
+  },
+  {
+    "value": "mola_mola",
+    "label": "Mola Mola"
+  },
+  {
+    "value": "monodelphis_domestica",
+    "label": "Monodelphis Domestica"
+  },
+  {
+    "value": "monodon_monoceros",
+    "label": "Monodon Monoceros"
+  },
+  {
+    "value": "monopterus_albus",
+    "label": "Monopterus Albus"
+  },
+  {
+    "value": "moschus_moschiferus",
+    "label": "Moschus Moschiferus"
+  },
+  {
+    "value": "mus_caroli",
+    "label": "Mus Caroli"
+  },
+  {
+    "value": "mus_musculus",
+    "label": "Mus Musculus"
+  },
+  {
+    "value": "mus_pahari",
+    "label": "Mus Pahari"
+  },
+  {
+    "value": "mus_spicilegus",
+    "label": "Mus Spicilegus"
+  },
+  {
+    "value": "mus_spretus",
+    "label": "Mus Spretus"
+  },
+  {
+    "value": "mustela_putorius",
+    "label": "Mustela Putorius"
+  },
+  {
+    "value": "myotis_lucifugus",
+    "label": "Myotis Lucifugus"
+  },
+  {
+    "value": "myripristis_murdjan",
+    "label": "Myripristis Murdjan"
+  },
+  {
+    "value": "naja_naja",
+    "label": "Naja Naja"
+  },
+  {
+    "value": "nannospalax_galili",
+    "label": "Nannospalax Galili"
+  },
+  {
+    "value": "neogobius_melanostomus",
+    "label": "Neogobius Melanostomus"
+  },
+  {
+    "value": "neolamprologus_brichardi",
+    "label": "Neolamprologus Brichardi"
+  },
+  {
+    "value": "neovison_vison",
+    "label": "Neovison Vison"
+  },
+  {
+    "value": "nomascus_leucogenys",
+    "label": "Nomascus Leucogenys"
+  },
+  {
+    "value": "notamacropus_eugenii",
+    "label": "Notamacropus Eugenii"
+  },
+  {
+    "value": "notechis_scutatus",
+    "label": "Notechis Scutatus"
+  },
+  {
+    "value": "nothobranchius_furzeri",
+    "label": "Nothobranchius Furzeri"
+  },
+  {
+    "value": "nothoprocta_perdicaria",
+    "label": "Nothoprocta Perdicaria"
+  },
+  {
+    "value": "numida_meleagris",
+    "label": "Numida Meleagris"
+  },
+  {
+    "value": "ochotona_princeps",
+    "label": "Ochotona Princeps"
+  },
+  {
+    "value": "octodon_degus",
+    "label": "Octodon Degus"
+  },
+  {
+    "value": "oncorhynchus_kisutch",
+    "label": "Oncorhynchus Kisutch"
+  },
+  {
+    "value": "oncorhynchus_mykiss",
+    "label": "Oncorhynchus Mykiss"
+  },
+  {
+    "value": "oncorhynchus_tshawytscha",
+    "label": "Oncorhynchus Tshawytscha"
+  },
+  {
+    "value": "oreochromis_aureus",
+    "label": "Oreochromis Aureus"
+  },
+  {
+    "value": "oreochromis_niloticus",
+    "label": "Oreochromis Niloticus"
+  },
+  {
+    "value": "ornithorhynchus_anatinus",
+    "label": "Ornithorhynchus Anatinus"
+  },
+  {
+    "value": "oryctolagus_cuniculus",
+    "label": "Oryctolagus Cuniculus"
+  },
+  {
+    "value": "oryzias_javanicus",
+    "label": "Oryzias Javanicus"
+  },
+  {
+    "value": "oryzias_latipes",
+    "label": "Oryzias Latipes"
+  },
+  {
+    "value": "oryzias_melastigma",
+    "label": "Oryzias Melastigma"
+  },
+  {
+    "value": "oryzias_sinensis",
+    "label": "Oryzias Sinensis"
+  },
+  {
+    "value": "otolemur_garnettii",
+    "label": "Otolemur Garnettii"
+  },
+  {
+    "value": "otus_sunia",
+    "label": "Otus Sunia"
+  },
+  {
+    "value": "ovis_aries",
+    "label": "Ovis Aries"
+  },
+  {
+    "value": "pan_paniscus",
+    "label": "Pan Paniscus"
+  },
+  {
+    "value": "pan_troglodytes",
+    "label": "Pan Troglodytes"
+  },
+  {
+    "value": "panthera_leo",
+    "label": "Panthera Leo"
+  },
+  {
+    "value": "panthera_pardus",
+    "label": "Panthera Pardus"
+  },
+  {
+    "value": "panthera_tigris",
+    "label": "Panthera Tigris"
+  },
+  {
+    "value": "papio_anubis",
+    "label": "Papio Anubis"
+  },
+  {
+    "value": "parambassis_ranga",
+    "label": "Parambassis Ranga"
+  },
+  {
+    "value": "paramormyrops_kingsleyae",
+    "label": "Paramormyrops Kingsleyae"
+  },
+  {
+    "value": "parus_major",
+    "label": "Parus Major"
+  },
+  {
+    "value": "pavo_cristatus",
+    "label": "Pavo Cristatus"
+  },
+  {
+    "value": "pelodiscus_sinensis",
+    "label": "Pelodiscus Sinensis"
+  },
+  {
+    "value": "pelusios_castaneus",
+    "label": "Pelusios Castaneus"
+  },
+  {
+    "value": "periophthalmus_magnuspinnatus",
+    "label": "Periophthalmus Magnuspinnatus"
+  },
+  {
+    "value": "peromyscus_maniculatus",
+    "label": "Peromyscus Maniculatus"
+  },
+  {
+    "value": "petromyzon_marinus",
+    "label": "Petromyzon Marinus"
+  },
+  {
+    "value": "phascolarctos_cinereus",
+    "label": "Phascolarctos Cinereus"
+  },
+  {
+    "value": "phasianus_colchicus",
+    "label": "Phasianus Colchicus"
+  },
+  {
+    "value": "phocoena_sinus",
+    "label": "Phocoena Sinus"
+  },
+  {
+    "value": "physeter_catodon",
+    "label": "Physeter Catodon"
+  },
+  {
+    "value": "piliocolobus_tephrosceles",
+    "label": "Piliocolobus Tephrosceles"
+  },
+  {
+    "value": "podarcis_muralis",
+    "label": "Podarcis Muralis"
+  },
+  {
+    "value": "poecilia_formosa",
+    "label": "Poecilia Formosa"
+  },
+  {
+    "value": "poecilia_latipinna",
+    "label": "Poecilia Latipinna"
+  },
+  {
+    "value": "poecilia_mexicana",
+    "label": "Poecilia Mexicana"
+  },
+  {
+    "value": "poecilia_reticulata",
+    "label": "Poecilia Reticulata"
+  },
+  {
+    "value": "pogona_vitticeps",
+    "label": "Pogona Vitticeps"
+  },
+  {
+    "value": "pongo_abelii",
+    "label": "Pongo Abelii"
+  },
+  {
+    "value": "procavia_capensis",
+    "label": "Procavia Capensis"
+  },
+  {
+    "value": "prolemur_simus",
+    "label": "Prolemur Simus"
+  },
+  {
+    "value": "propithecus_coquereli",
+    "label": "Propithecus Coquereli"
+  },
+  {
+    "value": "pseudonaja_textilis",
+    "label": "Pseudonaja Textilis"
+  },
+  {
+    "value": "pteropus_vampyrus",
+    "label": "Pteropus Vampyrus"
+  },
+  {
+    "value": "pundamilia_nyererei",
+    "label": "Pundamilia Nyererei"
+  },
+  {
+    "value": "pygocentrus_nattereri",
+    "label": "Pygocentrus Nattereri"
+  },
+  {
+    "value": "rattus_norvegicus",
+    "label": "Rattus Norvegicus"
+  },
+  {
+    "value": "rhinolophus_ferrumequinum",
+    "label": "Rhinolophus Ferrumequinum"
+  },
+  {
+    "value": "rhinopithecus_bieti",
+    "label": "Rhinopithecus Bieti"
+  },
+  {
+    "value": "rhinopithecus_roxellana",
+    "label": "Rhinopithecus Roxellana"
+  },
+  {
+    "value": "saccharomyces_cerevisiae",
+    "label": "Saccharomyces Cerevisiae"
+  },
+  {
+    "value": "saimiri_boliviensis",
+    "label": "Saimiri Boliviensis"
+  },
+  {
+    "value": "salarias_fasciatus",
+    "label": "Salarias Fasciatus"
+  },
+  {
+    "value": "salmo_salar",
+    "label": "Salmo Salar"
+  },
+  {
+    "value": "salmo_trutta",
+    "label": "Salmo Trutta"
+  },
+  {
+    "value": "salvator_merianae",
+    "label": "Salvator Merianae"
+  },
+  {
+    "value": "sander_lucioperca",
+    "label": "Sander Lucioperca"
+  },
+  {
+    "value": "sarcophilus_harrisii",
+    "label": "Sarcophilus Harrisii"
+  },
+  {
+    "value": "sciurus_vulgaris",
+    "label": "Sciurus Vulgaris"
+  },
+  {
+    "value": "scleropages_formosus",
+    "label": "Scleropages Formosus"
+  },
+  {
+    "value": "scophthalmus_maximus",
+    "label": "Scophthalmus Maximus"
+  },
+  {
+    "value": "serinus_canaria",
+    "label": "Serinus Canaria"
+  },
+  {
+    "value": "seriola_dumerili",
+    "label": "Seriola Dumerili"
+  },
+  {
+    "value": "seriola_lalandi",
+    "label": "Seriola Lalandi"
+  },
+  {
+    "value": "sinocyclocheilus_anshuiensis",
+    "label": "Sinocyclocheilus Anshuiensis"
+  },
+  {
+    "value": "sinocyclocheilus_grahami",
+    "label": "Sinocyclocheilus Grahami"
+  },
+  {
+    "value": "sinocyclocheilus_rhinocerous",
+    "label": "Sinocyclocheilus Rhinocerous"
+  },
+  {
+    "value": "sorex_araneus",
+    "label": "Sorex Araneus"
+  },
+  {
+    "value": "sparus_aurata",
+    "label": "Sparus Aurata"
+  },
+  {
+    "value": "spermophilus_dauricus",
+    "label": "Spermophilus Dauricus"
+  },
+  {
+    "value": "sphaeramia_orbicularis",
+    "label": "Sphaeramia Orbicularis"
+  },
+  {
+    "value": "sphenodon_punctatus",
+    "label": "Sphenodon Punctatus"
+  },
+  {
+    "value": "stachyris_ruficeps",
+    "label": "Stachyris Ruficeps"
+  },
+  {
+    "value": "stegastes_partitus",
+    "label": "Stegastes Partitus"
+  },
+  {
+    "value": "strigops_habroptila",
+    "label": "Strigops Habroptila"
+  },
+  {
+    "value": "strix_occidentalis",
+    "label": "Strix Occidentalis"
+  },
+  {
+    "value": "struthio_camelus",
+    "label": "Struthio Camelus"
+  },
+  {
+    "value": "suricata_suricatta",
+    "label": "Suricata Suricatta"
+  },
+  {
+    "value": "sus_scrofa",
+    "label": "Sus Scrofa"
+  },
+  {
+    "value": "taeniopygia_guttata",
+    "label": "Taeniopygia Guttata"
+  },
+  {
+    "value": "takifugu_rubripes",
+    "label": "Takifugu Rubripes"
+  },
+  {
+    "value": "terrapene_carolina",
+    "label": "Terrapene Carolina"
+  },
+  {
+    "value": "tetraodon_nigroviridis",
+    "label": "Tetraodon Nigroviridis"
+  },
+  {
+    "value": "theropithecus_gelada",
+    "label": "Theropithecus Gelada"
+  },
+  {
+    "value": "tupaia_belangeri",
+    "label": "Tupaia Belangeri"
+  },
+  {
+    "value": "tursiops_truncatus",
+    "label": "Tursiops Truncatus"
+  },
+  {
+    "value": "urocitellus_parryii",
+    "label": "Urocitellus Parryii"
+  },
+  {
+    "value": "ursus_americanus",
+    "label": "Ursus Americanus"
+  },
+  {
+    "value": "ursus_maritimus",
+    "label": "Ursus Maritimus"
+  },
+  {
+    "value": "ursus_thibetanus",
+    "label": "Ursus Thibetanus"
+  },
+  {
+    "value": "varanus_komodoensis",
+    "label": "Varanus Komodoensis"
+  },
+  {
+    "value": "vicugna_pacos",
+    "label": "Vicugna Pacos"
+  },
+  {
+    "value": "vombatus_ursinus",
+    "label": "Vombatus Ursinus"
+  },
+  {
+    "value": "vulpes_vulpes",
+    "label": "Vulpes Vulpes"
+  },
+  {
+    "value": "xenopus_tropicalis",
+    "label": "Xenopus Tropicalis"
+  },
+  {
+    "value": "xiphophorus_couchianus",
+    "label": "Xiphophorus Couchianus"
+  },
+  {
+    "value": "xiphophorus_maculatus",
+    "label": "Xiphophorus Maculatus"
+  },
+  {
+    "value": "zalophus_californianus",
+    "label": "Zalophus Californianus"
+  },
+  {
+    "value": "zonotrichia_albicollis",
+    "label": "Zonotrichia Albicollis"
+  },
+  {
+    "value": "zosterops_lateralis",
+    "label": "Zosterops Lateralis"
+  }
+]

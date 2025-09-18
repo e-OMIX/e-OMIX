@@ -1,0 +1,140 @@
+<mat-card class="experiment-container">
+  <mat-card-content>
+    <mat-card-title class="m-b-4" style="display: flex; align-items: center; gap: 8px;">
+      Experiments
+      <button mat-icon-button (click)="manualRefresh()" matTooltip="Refresh Data" class="refresh-button">
+        <mat-icon class="refresh-icon">refresh</mat-icon>
+      </button>
+    </mat-card-title>
+    <div class="table-responsive">
+      <table mat-table *ngIf="experiments.length > 0" [dataSource]="experimentsDataSource" matSort #sort="matSort"
+        class="w-100">
+        <ng-container matColumnDef="experimentName">
+          <th mat-header-cell *matHeaderCellDef>
+            <div style="display: flex; flex-direction: column;">
+              Experiment Name
+              <input matInput (keyup)="applyFilter($event, 'experimentName')" placeholder="Search by Name"
+                style="border: none; border-color: transparent;">
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let element" matTooltip="{{ element.experimentName }}">
+            {{ element.experimentName }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="cellularResolution">
+          <th mat-header-cell *matHeaderCellDef>
+            <div style="display: flex; flex-direction: column;">
+              Cellular Resolution
+              <mat-select [(ngModel)]="searchFilters['cellularResolution']"
+                (selectionChange)="applyFilter($event.value, 'cellularResolution')" placeholder="Select">
+                <mat-option value="">All</mat-option>
+                <mat-option value="Bulk">Bulk</mat-option>
+                <mat-option value="Single Cell">Single Cell</mat-option>
+              </mat-select>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let element" matTooltip="{{ element.cellularResolution }}">
+            {{ element.cellularResolution }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="omicsModality">
+          <th mat-header-cell *matHeaderCellDef>
+            <div style="display: flex; flex-direction: column;">
+              Omics Modality
+              <mat-select [(ngModel)]="searchFilters['omicsModality']"
+                (selectionChange)="applyFilter($event.value, 'omicsModality')" placeholder="Select">
+                <mat-option value="">All</mat-option>
+                <mat-option value="dna">DNA</mat-option>
+                <mat-option value="rna">RNA</mat-option>
+                <mat-option value="aa">Protein</mat-option>
+              </mat-select>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let element" matTooltip="{{ element.omicsModality }}">
+            {{ element.omicsModality }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="experimentType">
+          <th mat-header-cell *matHeaderCellDef>
+            <div style="display: flex; flex-direction: column;">
+              Analysis Step
+              <mat-select [(ngModel)]="searchFilters['experimentType']"
+                (selectionChange)="applyFilter($event.value, 'experimentType')" placeholder="Search by Step">
+                <mat-option value="">All</mat-option>
+                <mat-option value="alignment">Alignment</mat-option>
+                <mat-option value="post-Processing">Post-Processing</mat-option></mat-select>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.experimentType }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>
+            <div style="display: flex; flex-direction: column;">
+              Status
+              <mat-select [(ngModel)]="searchFilters['status']" (selectionChange)="applyFilter($event.value, 'status')"
+                placeholder="Select Status">
+                <mat-option value="">All</mat-option>
+                <mat-option value="in_evaluation">In Evaluation</mat-option>
+                <mat-option value="in_progress">In Progress</mat-option>
+                <mat-option value="done">Done</mat-option>
+                <mat-option value="error">Error</mat-option>
+              </mat-select>
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let element" [ngClass]="getStatusClass(element.status)">
+            {{ element.status | statusFormat}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> Created At
+          </th>
+          <td mat-cell *matCellDef="let element" matTooltip="{{ element.createdAt }}">
+            {{ element.createdAt }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef> Visualize result </th>
+          <td mat-cell *matCellDef="let element">
+            <button [disabled]="element.status !== 'Done'"
+              *ngIf="element.experimentType === 'Alignment' && element.status !== 'Error'"
+              (click)="viewHtml(element.experimentName)" class="experiment-button"> <mat-icon>visibility</mat-icon>View
+              MultiQC</button>
+            <button *ngIf="element.experimentType === 'Post-processing' && element.status !== 'Error'"
+              (click)="openVisualizationN(element.experimentName)" class="experiment-button"
+              [disabled]="element.status !== 'Done'">
+              <mat-icon>visibility</mat-icon> Visualize
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="download">
+          <th mat-header-cell *matHeaderCellDef> Download </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="experiment-button">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="downloadJson(element)" class="experiment-button">
+                <mat-icon>download</mat-icon> Download parameters
+              </button>
+              <button mat-menu-item *ngIf="element.experimentType === 'Alignment' && element.status !== 'Error'"
+                [disabled]="element.status !== 'Done'" (click)="downloadAllMatrices(element.experimentName)"
+                class="experiment-button"> <mat-icon>download</mat-icon>
+                Download Raw Matrix </button>
+              <button mat-menu-item *ngIf="element.experimentType !== 'Alignment' && element.status !== 'Error'"
+                (click)="downloadProcessedMatrix(element.experimentName)" [disabled]="element.status !== 'Done'"
+                class="experiment-button"> <mat-icon>download</mat-icon> Download Processed Matrix</button>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[6, 10, 25]" showFirstLastButtons></mat-paginator>
+    <mat-card-title *ngIf="experiments.length === 0" class="mat-mdc-card-subtitle">
+      No Experiments available to download.
+    </mat-card-title>
+  </mat-card-content>
+</mat-card>
