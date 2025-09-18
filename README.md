@@ -137,7 +137,7 @@ For the eomix database:
     }
   },
   "language": "javascript"
-} ```
+}
 ```
  **MetadataFileUploadEntity**
 
