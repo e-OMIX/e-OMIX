@@ -48,43 +48,6 @@ print("SingleCellExperiment object: OK")
 ## Cleanup
 rm(sce_object_address)
 
-## Landing page ####
-## Example
-# library(scRNAseq)
-# all.data <- ls("package:scRNAseq")
-# all.data <- all.data[grep("Data$", all.data)]
-#
-# lpfun <- createLandingPage(
-#   seUI=function(id) selectInput(id, "Dataset:", choices=all.data),
-#   seLoad=function(x) get(x, as.environment("package:scRNAseq"))()
-# )
-
-# ## Test Shiny with hello world ####
-# library(shiny)
-# 
-# 
-# ui <- fluidPage(
-#   titlePanel("Hello world!"),
-#   sidebarLayout(
-#     sidebarPanel(
-#       sliderInput("obs", "Number of observations:", min = 1, max = 1000, value = 500)
-#     ),
-#     mainPanel(
-#       plotOutput("distPlot")
-#     )
-#   )
-# )
-# 
-# server <- function(input, output) {
-#   output$distPlot <- renderPlot({
-#     hist(rnorm(input$obs))
-#   })
-# }
-# options(shiny.trace = TRUE)
-# app <- shinyApp(ui = ui, server = server)
-# runApp(app, host = "0.0.0.0", port = 3838)         
-
-
 ## Test iSEE with mock data ####
 # library(iSEE)
 # library(SingleCellExperiment)
