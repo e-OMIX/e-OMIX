@@ -356,3 +356,8 @@ Before running the application, verify that all services are running:
 - [ ] CouchDB design documents installed
 
 Now you can access the application at `http://localhost:4200` 🎉
+
+
+**Licence**
+
+The e-OMIX code is distrubuted under a [AGPL v3 licence](https://www.gnu.org/licenses/agpl-3.0.en.html).
